@@ -154,7 +154,7 @@
         <div class="container px-4">
             <i class="bi bi-shield-check display-4 mb-2"></i>
             <h1 class="fw-bold">Libro de Reclamaciones Virtual</h1>
-            <p class="mb-0 opacity-75 small">Policía Nacional del Perú - Dirección de Educación y Doctrina de la PNP</p>
+            <p class="mb-0 opacity-75 small">Policía Nacional del Perú - Dirección de Educación y Doctrina</p>
         </div>
     </div>
 
