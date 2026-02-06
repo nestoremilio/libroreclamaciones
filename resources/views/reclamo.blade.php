@@ -59,6 +59,8 @@
             background-color: #093624;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(12, 75, 51, 0.4);
+            /* ESTA LÍNEA ARREGLA EL TEXTO OSCURO */
+            color: white !important;
         }
 
         /* Ajustes de Inputs Flotantes */
