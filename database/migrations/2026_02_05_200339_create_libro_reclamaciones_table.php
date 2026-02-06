@@ -9,6 +9,8 @@ return new class extends Migration {
     {
         Schema::create('libro_reclamaciones', function (Blueprint $table) {
             $table->id();
+
+            // 1. Datos del Usuario
             $table->string('nombre_completo');
             $table->string('tipo_documento');
             $table->string('numero_documento');
@@ -16,20 +18,19 @@ return new class extends Migration {
             $table->string('telefono');
             $table->string('email');
 
-            $table->enum('tipo_bien', ['producto', 'servicio']);
-            $table->decimal('monto_reclamado', 10, 2)->nullable();
-            $table->text('descripcion_bien');
-
-            $table->enum('tipo_reclamo', ['reclamo', 'queja']);
+            // 2. Detalle del Reclamo
+            $table->string('tipo_bien'); // Producto o Servicio
+            $table->decimal('monto_reclamado', 10, 2)->nullable(); // Opcional
+            $table->string('descripcion_bien');
+            $table->string('tipo_reclamo'); // Queja o Reclamo
             $table->text('detalle');
             $table->text('pedido');
 
-            $table->string('codigo_seguimiento')->unique();
-            $table->enum('estado', ['pendiente', 'en_proceso', 'atendido'])->default('pendiente');
-            $table->text('respuesta_empresa')->nullable();
-            $table->date('fecha_respuesta')->nullable();
+            // 3. Gestión Interna
+            $table->string('codigo_seguimiento')->unique(); // Para que el usuario consulte
+            $table->string('estado')->default('pendiente'); // pendiente, atendido, etc.
 
-            $table->timestamps();
+            $table->timestamps(); // Fecha de creación
         });
     }
 
