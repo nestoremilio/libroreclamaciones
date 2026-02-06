@@ -22,3 +22,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/reclamo/{id}', [AdminController::class, 'show'])->name('admin.show');
     Route::post('/admin/reclamo/{id}/atender', [AdminController::class, 'atender'])->name('admin.atender');
 });
+// --- BORRAR ESTO DESPUÉS DE USAR ---
+Route::get('/crear-admin-emergencia', function () {
+    // 1. Verificar si ya existe
+    if (\App\Models\User::where('email', 'admin@pnp.gob.pe')->exists()) {
+        return "El usuario Admin YA existe. Intenta resetear la clave si no entras.";
+    }
+
+    // 2. Crear el usuario
+    \App\Models\User::create([
+        'name' => 'Administrador',
+        'email' => 'admin@pnp.gob.pe',
+        'password' => \Illuminate\Support\Facades\Hash::make('sistemas2026')
+    ]);
+
+    return "¡Usuario Creado! Ahora ve al login e intenta entrar.";
+});
