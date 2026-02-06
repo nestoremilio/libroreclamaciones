@@ -46,7 +46,7 @@
             border-bottom: 2px solid #e9ecef;
         }
 
-        /* Botón Personalizado */
+        /* Botón Personalizado (Enviar Reclamo) */
         .btn-pnp {
             background-color: #0c4b33;
             color: white;
@@ -74,16 +74,35 @@
             color: #6c757d;
         }
 
-        /* Enlace Admin Discreto */
+        /* --- NUEVO ESTILO: BOTÓN ADMIN VISIBLE --- */
         .admin-link {
             text-decoration: none;
-            color: #adb5bd;
-            font-size: 0.8rem;
-            transition: color 0.3s;
+            color: white;
+            /* Texto blanco */
+            background-color: #0c4b33;
+            /* Fondo verde */
+            padding: 10px 20px;
+            /* Tamaño del botón */
+            border-radius: 30px;
+            /* Bordes redondeados */
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            /* Para que respete el padding */
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Sombra suave */
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .admin-link:hover {
-            color: #0c4b33;
+            background-color: #093624;
+            /* Verde más oscuro al pasar el mouse */
+            transform: translateY(-3px);
+            /* Se eleva un poco */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
         }
     </style>
 </head>
