@@ -262,7 +262,7 @@
             <a href="{{ route('login') }}" class="admin-link">
                 <i class="bi bi-shield-lock"></i> Acceso Administrativo
             </a>
-            <p class="small text-muted mt-2 opacity-50">&copy; {{ date('Y') }} UTIC - PNP</p>
+            <p class="small text-muted mt-2 opacity-50">&copy; {{ date('Y') }} DESARROLLADO POR UNITIC-DIREDDOC PNP</p>
         </div>
     </footer>
 
