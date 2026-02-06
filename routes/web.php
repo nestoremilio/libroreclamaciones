@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\Request;
+use App\Models\LibroReclamaciones; // Aseguraremos esto luego
 
+// Ruta Principal: Muestra el formulario
 Route::get('/', function () {
-    return view('welcome');
+    return view('reclamo');
 });
 
-Route::get('/instalar-db', function () {
-    Artisan::call('migrate --force');
-    return "¡Base de datos instalada correctamente!";
-});
+// Ruta para Guardar (La lógica la haremos en el siguiente paso)
+Route::post('/guardar', function (Request $request) {
+    return "Aquí procesaremos el reclamo de: " . $request->nombre_completo;
+})->name('guardar-reclamo');
