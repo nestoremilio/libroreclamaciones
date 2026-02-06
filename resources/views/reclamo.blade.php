@@ -13,6 +13,9 @@
         body {
             background-color: #f0f2f5;
             font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Cabecera con Degradado Institucional */
@@ -20,7 +23,6 @@
             background: linear-gradient(135deg, #0c4b33 0%, #157347 100%);
             color: white;
             padding: 40px 0 80px;
-            /* Más espacio abajo para el efecto flotante */
             box-shadow: 0 4px 20px rgba(12, 75, 51, 0.3);
         }
 
@@ -29,7 +31,6 @@
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             margin-top: -60px;
-            /* Efecto flotante sobre el header */
             border: none;
             overflow: hidden;
         }
@@ -59,7 +60,6 @@
             background-color: #093624;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(12, 75, 51, 0.4);
-            /* ESTA LÍNEA ARREGLA EL TEXTO OSCURO */
             color: white !important;
         }
 
@@ -73,6 +73,18 @@
             font-size: 0.85rem;
             color: #6c757d;
         }
+
+        /* Enlace Admin Discreto */
+        .admin-link {
+            text-decoration: none;
+            color: #adb5bd;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .admin-link:hover {
+            color: #0c4b33;
+        }
     </style>
 </head>
 
@@ -82,11 +94,11 @@
         <div class="container">
             <i class="bi bi-shield-check display-4 mb-2"></i>
             <h1 class="fw-bold">Libro de Reclamaciones Virtual</h1>
-            <p class="mb-0 opacity-75">Policía Nacional del Perú - Dirección de Educación y Doctrina PNP</p>
+            <p class="mb-0 opacity-75">Policía Nacional del Perú - Unidad de Tecnología (UTIC)</p>
         </div>
     </div>
 
-    <div class="container pb-5">
+    <div class="container pb-5 flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="form-card p-4 p-md-5">
@@ -243,6 +255,17 @@
             </div>
         </div>
     </div>
+
+    <footer class="text-center py-4 mt-auto">
+        <div class="container">
+            <hr class="mb-3 text-muted opacity-25">
+            <a href="{{ route('login') }}" class="admin-link">
+                <i class="bi bi-shield-lock"></i> Acceso Administrativo
+            </a>
+            <p class="small text-muted mt-2 opacity-50">&copy; {{ date('Y') }} UTIC - PNP</p>
+        </div>
+    </footer>
+
 </body>
 
 </html>
