@@ -30,4 +30,17 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo marcado como atendido correctamente.');
     }
+
+    // --- NUEVA FUNCIÓN: ELIMINAR RECLAMO ---
+    public function destroy($id)
+    {
+        // 1. Buscar el reclamo (si no existe, falla automáticamente)
+        $reclamo = LibroReclamaciones::findOrFail($id);
+
+        // 2. Eliminarlo de la base de datos
+        $reclamo->delete();
+
+        // 3. Regresar al dashboard con mensaje de éxito
+        return redirect()->route('admin.dashboard')->with('success', 'Reclamo eliminado correctamente.');
+    }
 }

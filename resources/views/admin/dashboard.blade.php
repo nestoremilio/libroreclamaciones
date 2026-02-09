@@ -77,6 +77,13 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
         <div class="row mb-4">
             <div class="col-md-8">
                 <h3 class="fw-bold text-dark">Bandeja de Reclamaciones</h3>
@@ -134,6 +141,16 @@
                                         class="btn btn-primary btn-sm rounded-pill px-3">
                                         Ver y Atender <i class="bi bi-arrow-right-short"></i>
                                     </a>
+
+                                    <form action="{{ route('admin.destroy', $reclamo->id) }}" method="POST" class="d-inline"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este reclamo de forma permanente?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3 ms-1"
+                                            title="Eliminar Reclamo">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -142,6 +159,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

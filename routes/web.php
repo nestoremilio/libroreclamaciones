@@ -21,4 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/reclamo/{id}', [AdminController::class, 'show'])->name('admin.show');
     Route::post('/admin/reclamo/{id}/atender', [AdminController::class, 'atender'])->name('admin.atender');
+
+    // ESTA ES LA RUTA NUEVA PARA EL BOTÓN DE BORRAR:
+    Route::delete('/admin/reclamo/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
