@@ -8,57 +8,90 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --pnp-green: #135835;
+            /* Verde Institucional PNP */
+            --pnp-dark: #0b3d24;
+        }
+
         body {
-            background-color: #f8f9fa;
+            background-color: #f4f6f9;
             font-family: 'Inter', sans-serif;
         }
 
+        /* Navbar Verde PNP */
+        .bg-pnp {
+            background-color: var(--pnp-green) !important;
+        }
+
+        /* Tarjeta con borde superior verde */
         .card {
             border: none;
+            border-top: 5px solid var(--pnp-green);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
+        /* Cabecera de tabla estilo PNP */
         .table thead th {
-            background-color: #f1f3f5;
-            color: #495057;
-            font-weight: 600;
+            background-color: var(--pnp-green);
+            color: white;
+            font-weight: 500;
             border: none;
             padding: 15px;
+            letter-spacing: 0.5px;
         }
 
         .table tbody td {
             vertical-align: middle;
             padding: 15px;
+            border-bottom: 1px solid #e9ecef;
         }
 
+        /* Botón personalizado PNP */
+        .btn-pnp {
+            background-color: var(--pnp-green);
+            border-color: var(--pnp-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pnp:hover {
+            background-color: var(--pnp-dark);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Etiquetas de estado */
         .badge-status {
             padding: 8px 12px;
             border-radius: 30px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.85rem;
         }
 
         .status-pendiente {
             background-color: #fff3cd;
             color: #856404;
+            border: 1px solid #ffeeba;
         }
 
         .status-atendido {
             background-color: #d1e7dd;
             color: #0f5132;
+            border: 1px solid #badbcc;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-pnp py-3 shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">
                 <i class="bi bi-shield-lock-fill me-2"></i> Panel de Control PNP
             </a>
             <div class="d-flex align-items-center">
-                <span class="text-white me-3 small opacity-75">
+                <span class="text-white me-3 small opacity-90">
                     <i class="bi bi-person-circle me-1"></i> Administrador
                 </span>
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
@@ -84,9 +117,9 @@
             </div>
         @endif
 
-        <div class="row mb-4">
+        <div class="row mb-4 align-items-end">
             <div class="col-md-8">
-                <h3 class="fw-bold text-dark">Bandeja de Reclamaciones</h3>
+                <h3 class="fw-bold" style="color: var(--pnp-green);">Bandeja de Reclamaciones</h3>
                 <p class="text-muted">Gestione los reclamos ciudadanos registrados.</p>
             </div>
             <div class="col-md-4 text-end">
@@ -138,7 +171,7 @@
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.show', $reclamo->id) }}"
-                                        class="btn btn-primary btn-sm rounded-pill px-3">
+                                        class="btn btn-pnp btn-sm rounded-pill px-3">
                                         Ver y Atender <i class="bi bi-arrow-right-short"></i>
                                     </a>
 
