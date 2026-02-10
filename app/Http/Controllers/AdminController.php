@@ -31,7 +31,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo marcado como atendido correctamente.');
     }
 
-<<<<<<< HEAD
+
     // Eliminar un reclamo
     public function destroy($id)
     {
@@ -39,7 +39,7 @@ class AdminController extends Controller
         $reclamo->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo eliminado correctamente');
-=======
+
     // --- NUEVA FUNCIÓN: ELIMINAR RECLAMO ---
     public function destroy($id)
     {
@@ -51,6 +51,6 @@ class AdminController extends Controller
 
         // 3. Regresar al dashboard con mensaje de éxito
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo eliminado correctamente.');
->>>>>>> 45fa20c0cd6b59da74cdf955984408902805c55c
+
     }
 }
