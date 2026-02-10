@@ -93,7 +93,7 @@
             <div class="login-header">
                 <i class="bi bi-shield-lock-fill login-icon"></i>
                 <h3 class="fw-bold mb-1" style="color: var(--pnp-green-dark);">Acceso Administrativo</h3>
-                <p class="text-muted small mb-0">Sistema de Libro de Reclamaciones - 2026</p>
+                <p class="text-muted small mb-0">Sistema de Libro de Reclamaciones - 2026.</p>
             </div>
 
             <form method="POST" action="{{ route('login') }}">
@@ -142,7 +142,7 @@
                 </div>
             </form>
         </div>
-        <p class="text-center text-white-50 mt-4 small">&copy; 2026 Dirección de Educación y Doctrina - PNP</p>
+        <p class="text-center text-white-50 mt-4 small">&copy; Desarollado por UNITIC-DIREDDOC PNP</p>
     </div>
 </body>
 
