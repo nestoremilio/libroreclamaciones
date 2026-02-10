@@ -5,40 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Libro de Reclamaciones - PNP</title>
+    <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --pnp-green: #135835;
+            --pnp-green-dark: #0e4429;
+            --pnp-gray: #6c757d;
+            --bg-light: #f4f6f9;
+        }
+
         body {
-            background-color: #f0f2f5;
+            background-color: var(--bg-light);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- ESTILOS GENERALES --- */
+        /* --- Header Institucional --- */
         .header-pnp {
-            background: linear-gradient(135deg, #0c4b33 0%, #157347 100%);
+            background: linear-gradient(135deg, var(--pnp-green) 0%, var(--pnp-green-dark) 100%);
             color: white;
             padding: 40px 0 80px;
-            box-shadow: 0 4px 20px rgba(12, 75, 51, 0.3);
-            transition: padding 0.3s ease;
+            box-shadow: 0 4px 20px rgba(19, 88, 53, 0.3);
+            text-align: center;
         }
 
+        .header-logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Tarjeta del Formulario --- */
         .form-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem; /* rounded-3 equiv approx */
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); /* shadow-sm+ */
             margin-top: -60px;
             border: none;
             overflow: hidden;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
         .section-title {
-            color: #0c4b33;
+            color: var(--pnp-green);
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -49,265 +65,272 @@
             font-size: 1.1rem;
         }
 
-        /* Botón de Envío */
+        /* --- Inputs y Labels --- */
+        .form-floating > label {
+            padding-left: 2.5rem; /* Espacio para icono si fuera absolute, pero usaremos input-group o iconos inline si se prefiere */
+        }
+        
+        .input-group-text {
+            background-color: transparent;
+            border-right: none;
+            color: var(--pnp-green);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--pnp-green);
+            box-shadow: 0 0 0 0.25rem rgba(19, 88, 53, 0.25);
+        }
+
+        .form-control, .form-select {
+            border-left: none; /* Si usamos input-group */
+        }
+
+        /* Ajuste para inputs sin input-group si se usa form-floating directo con iconos dentro */
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            z-index: 5;
+            color: var(--pnp-gray);
+        }
+
+        /* --- Botón Principal --- */
         .btn-pnp {
-            background-color: #0c4b33;
+            background-color: var(--pnp-green);
             color: white;
             font-weight: 600;
-            padding: 12px 40px;
+            padding: 12px 30px;
             border-radius: 50px;
             transition: all 0.3s;
             border: none;
+            width: 100%;
         }
 
         .btn-pnp:hover {
-            background-color: #093624;
+            background-color: var(--pnp-green-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(12, 75, 51, 0.4);
-            color: white !important;
+            box-shadow: 0 5px 15px rgba(19, 88, 53, 0.4);
+            color: white;
         }
 
-        .form-floating>.form-control:focus {
-            border-color: #157347;
-            box-shadow: 0 0 0 0.25rem rgba(21, 115, 71, 0.25);
+        /* --- Radio Button Cards --- */
+        .tipo-reclamo-card {
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tipo-reclamo-card:hover {
+            background-color: #f8f9fa;
+            border-color: var(--pnp-green);
         }
 
+        .form-check-input:checked {
+            background-color: var(--pnp-green);
+            border-color: var(--pnp-green);
+        }
+
+        /* --- Footer --- */
         .footer-text {
             font-size: 0.85rem;
-            color: #6c757d;
+            color: var(--pnp-gray);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
         }
 
-        /* Botón Admin */
         .admin-link {
+            color: var(--pnp-gray);
             text-decoration: none;
-            color: white;
-            background-color: #0c4b33;
-            padding: 10px 20px;
-            border-radius: 30px;
             font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: color 0.3s;
         }
 
         .admin-link:hover {
-            background-color: #093624;
-            transform: translateY(-3px);
-            color: white;
+            color: var(--pnp-green);
         }
 
-        /* --- OPTIMIZACIÓN MÓVIL (RESPONSIVE) --- */
+        /* --- Mobile --- */
         @media (max-width: 768px) {
-            .header-pnp {
-                padding: 30px 0 60px;
-                /* Menos altura en header */
-            }
-
-            .header-pnp h1 {
-                font-size: 1.5rem;
-                /* Título más pequeño */
-            }
-
-            .display-4 {
-                font-size: 2.5rem;
-                /* Icono escudo más pequeño */
-            }
-
-            .form-card {
-                margin-top: -40px;
-                /* Menos margen negativo */
-                border-radius: 12px;
-                padding: 1.5rem !important;
-                /* Menos padding interno */
-            }
-
-            .btn-pnp {
-                width: 100%;
-                /* Botón ancho completo para dedos */
-                padding: 14px;
-                font-size: 1.1rem;
-            }
-
-            /* Inputs más grandes para evitar zoom en iOS */
-            .form-control,
-            .form-select {
-                font-size: 16px;
-            }
-
-            .section-title {
-                font-size: 1rem;
-                flex-direction: column;
-                /* Icono arriba del texto en títulos largos */
-                align-items: flex-start;
-                gap: 5px;
-            }
+            .header-pnp { padding: 30px 0 50px; }
+            .form-card { margin-top: -30px; padding: 1.5rem !important; }
+            .header-logo { font-size: 2.5rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header-pnp text-center">
-        <div class="container px-4">
-            <i class="bi bi-shield-check display-4 mb-2"></i>
-            <h1 class="fw-bold">Libro de Reclamaciones Virtual 2026</h1>
-            <p class="mb-0 opacity-75 small">Policía Nacional del Perú - Dirección de Educación y Doctrina</p>
+    <div class="header-pnp">
+        <div class="container">
+            <i class="bi bi-shield-shaded header-logo"></i>
+            <h1 class="fw-bold h2">Libro de Reclamaciones Virtual</h1>
+            <p class="mb-0 opacity-75">Policía Nacional del Perú - 2026</p>
         </div>
     </div>
 
-    <div class="container pb-5 flex-grow-1">
+    <div class="container pb-5">
         <div class="row justify-content-center">
-            <div class="col-lg-9 col-xl-8">
-                <div class="form-card p-3 p-md-5">
+            <div class="col-lg-10 col-xl-8">
+                <div class="form-card p-4 p-md-5 shadow-sm rounded-3">
+                    
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
 
                     <form action="{{ route('guardar-reclamo') }}" method="POST">
                         @csrf
 
+                        <!-- Sección 1: Identificación -->
                         <div class="mb-5">
                             <h5 class="section-title">
-                                <div><i class="bi bi-person-vcard-fill fs-4 me-2"></i></div>
+                                <i class="bi bi-person-lines-fill"></i>
                                 <span>1. Identificación del Usuario</span>
                             </h5>
 
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" name="nombre_completo" class="form-control" id="nombre"
-                                            placeholder="Nombre" required>
-                                        <label for="nombre">Nombre Completo</label>
+                                    <label for="nombre" class="form-label text-muted small fw-bold">Nombre Completo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" name="nombre_completo" class="form-control" id="nombre" placeholder="Ingrese su nombre completo" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-4">
-                                    <div class="form-floating">
+                                <div class="col-12 col-md-5">
+                                    <label for="tipoDoc" class="form-label text-muted small fw-bold">Tipo Documento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
                                         <select name="tipo_documento" class="form-select" id="tipoDoc">
                                             <option>DNI</option>
                                             <option>Carnet Extranjería</option>
                                             <option>Pasaporte</option>
                                         </select>
-                                        <label for="tipoDoc">Tipo Doc.</label>
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-8">
-                                    <div class="form-floating">
-                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc"
-                                            placeholder="Número" required inputmode="numeric">
-                                        <label for="numDoc">Número de Documento</label>
+                                <div class="col-12 col-md-7">
+                                    <label for="numDoc" class="form-label text-muted small fw-bold">Número Documento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-123"></i></span>
+                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc" placeholder="Ej: 12345678" required inputmode="numeric">
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" name="domicilio" class="form-control" id="domicilio"
-                                            placeholder="Dirección" required>
-                                        <label for="domicilio">Domicilio Actual</label>
+                                    <label for="domicilio" class="form-label text-muted small fw-bold">Domicilio Actual</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                        <input type="text" name="domicilio" class="form-control" id="domicilio" placeholder="Dirección completa" required>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <div class="form-floating">
-                                        <input type="tel" name="telefono" class="form-control" id="telefono"
-                                            placeholder="Teléfono" required inputmode="tel">
-                                        <label for="telefono">Teléfono / Celular</label>
+                                    <label for="telefono" class="form-label text-muted small fw-bold">Teléfono / Celular</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ej: 999888777" required inputmode="tel">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" name="email" class="form-control" id="email"
-                                            placeholder="Email" required>
-                                        <label for="email">Correo Electrónico</label>
+                                    <label for="email" class="form-label text-muted small fw-bold">Correo Electrónico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Sección 2: Detalle Reclamo -->
                         <div class="mb-4">
                             <h5 class="section-title">
-                                <div><i class="bi bi-clipboard-data-fill fs-4 me-2"></i></div>
+                                <i class="bi bi-file-earmark-text-fill"></i>
                                 <span>2. Detalle de la Reclamación</span>
                             </h5>
 
                             <div class="row g-3">
                                 <div class="col-12 col-md-8">
-                                    <div class="form-floating">
+                                    <label for="tipoBien" class="form-label text-muted small fw-bold">Bien Contratado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
                                         <select name="tipo_bien" class="form-select" id="tipoBien">
                                             <option value="servicio">Servicio (Atención, trámites, etc.)</option>
                                             <option value="producto">Producto (Bienes materiales)</option>
                                         </select>
-                                        <label for="tipoBien">Bien Contratado</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-4">
-                                    <div class="form-floating">
-                                        <input type="number" step="0.01" name="monto_reclamado" class="form-control"
-                                            id="monto" placeholder="Monto" inputmode="decimal">
-                                        <label for="monto">Monto (Opcional)</label>
+                                    <label for="monto" class="form-label text-muted small fw-bold">Monto (Opcional)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">S/</span>
+                                        <input type="number" step="0.01" name="monto_reclamado" class="form-control" id="monto" placeholder="0.00">
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" name="descripcion_bien" class="form-control" id="descBien"
-                                            placeholder="Descripción" required>
-                                        <label for="descBien">Descripción (Ej: Trámite de Antecedentes)</label>
+                                    <label for="descBien" class="form-label text-muted small fw-bold">Descripción del Bien/Servicio</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                                        <input type="text" name="descripcion_bien" class="form-control" id="descBien" placeholder="Ej: Trámite de Antecedentes Policiales" required>
                                     </div>
                                 </div>
 
                                 <div class="col-12 mt-4">
-                                    <label class="fw-bold mb-2 d-block small text-uppercase text-muted">Seleccione el
-                                        Tipo:</label>
-                                    <div class="d-flex flex-column flex-md-row gap-3 p-3 border rounded bg-light">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tipo_reclamo"
-                                                value="reclamo" id="radioReclamo" checked>
-                                            <label class="form-check-label fw-bold text-dark" for="radioReclamo">
-                                                Reclamo
-                                            </label>
-                                            <small class="d-block text-muted lh-1 mt-1">Disconformidad con productos o
-                                                servicios.</small>
+                                    <label class="fw-bold mb-3 d-block small text-uppercase text-secondary">Tipo de Registro:</label>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="tipo-reclamo-card h-100">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="reclamo" id="radioReclamo" checked>
+                                                    <label class="form-check-label fw-bold text-dark" for="radioReclamo">
+                                                        Reclamo
+                                                    </label>
+                                                    <small class="d-block text-muted lh-sm mt-1">Disconformidad relacionada a los productos o servicios.</small>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tipo_reclamo"
-                                                value="queja" id="radioQueja">
-                                            <label class="form-check-label fw-bold text-dark" for="radioQueja">
-                                                Queja
-                                            </label>
-                                            <small class="d-block text-muted lh-1 mt-1">Malestar por la atención al
-                                                público.</small>
+                                        <div class="col-md-6">
+                                            <div class="tipo-reclamo-card h-100">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="queja" id="radioQueja">
+                                                    <label class="form-check-label fw-bold text-dark" for="radioQueja">
+                                                        Queja
+                                                    </label>
+                                                    <small class="d-block text-muted lh-sm mt-1">Malestar o descontento respecto a la atención al público.</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea name="detalle" class="form-control" placeholder="Detalle" id="detalle"
-                                            style="height: 120px" required></textarea>
-                                        <label for="detalle">Detalle de los hechos</label>
-                                    </div>
+                                <div class="col-12 mt-3">
+                                    <label for="detalle" class="form-label text-muted small fw-bold">Detalle de los hechos</label>
+                                    <textarea name="detalle" class="form-control" placeholder="Describa detalladamente lo sucedido..." id="detalle" style="height: 120px" required></textarea>
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea name="pedido" class="form-control" placeholder="Pedido" id="pedido"
-                                            style="height: 100px" required></textarea>
-                                        <label for="pedido">Pedido del Usuario</label>
-                                    </div>
+                                    <label for="pedido" class="form-label text-muted small fw-bold">Pedido del Usuario</label>
+                                    <textarea name="pedido" class="form-control" placeholder="¿Qué solución espera recibir?" id="pedido" style="height: 100px" required></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="text-center mt-5">
-                            <button type="submit" class="btn btn-pnp btn-lg">
-                                <i class="bi bi-send-fill me-2"></i> Registrar Reclamo
+                            <button type="submit" class="btn btn-pnp btn-lg shadow">
+                                <i class="bi bi-send-fill me-2"></i> Enviar Reclamo
                             </button>
-                            <p class="footer-text mt-3 px-3">Sus datos serán tratados conforme a la Ley de Protección de
-                                Datos Personales.</p>
+                            <p class="small text-muted mt-3">
+                                <i class="bi bi-lock-fill"></i> Sus datos serán tratados conforme a la Ley de Protección de Datos Personales.
+                            </p>
                         </div>
 
                     </form>
@@ -316,16 +339,17 @@
         </div>
     </div>
 
-    <footer class="text-center py-4 mt-auto">
+    <footer class="footer-text">
         <div class="container">
-            <hr class="mb-4 text-muted opacity-25">
-            <a href="{{ route('login') }}" class="admin-link">
-                <i class="bi bi-shield-lock me-1"></i> Acceso Administrativo
-            </a>
-            <p class="small text-muted mt-2 opacity-50">&copy; {{ date('Y') }} DESARROLLADO POR UNITIC-DIREDDOC PNP</p>
+            <hr class="mb-4 opacity-25">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <span class="mb-2 mb-md-0">&copy; 2026 Policía Nacional del Perú - DIREDDOC</span>
+                <a href="{{ route('login') }}" class="admin-link">
+                    <i class="bi bi-shield-lock me-1"></i> Acceso Administrativo
+                </a>
+            </div>
         </div>
     </footer>
 
 </body>
-
 </html>
