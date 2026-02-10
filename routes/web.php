@@ -23,3 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/reclamo/{id}/atender', [AdminController::class, 'atender'])->name('admin.atender');
     Route::delete('/admin/reclamo/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
+Route::get('/limpiar', function () {
+    Artisan::call('optimize:clear');
+    return '¡Sistema limpio y actualizado!';
+});
