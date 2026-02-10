@@ -362,7 +362,7 @@
         <div class="container">
             <hr class="mb-4 opacity-25">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <span class="mb-2 mb-md-0">&copy; 2026 Policía Nacional del Perú - DIREDDOC</span>
+                <span class="mb-2 mb-md-0">&copy; Desarrollado por UNITIC - DIREDDOC 2026</span>
                 <a href="{{ route('login') }}" class="admin-link">
                     <i class="bi bi-shield-lock me-1"></i> Acceso Administrativo
                 </a>
