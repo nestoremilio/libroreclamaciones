@@ -160,7 +160,7 @@
                 style="height: 120px; width: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
 
             <h1 class="fw-bold h2">Libro de Reclamaciones Virtual</h1>
-            <p class="mb-0 opacity-75">Policía Nacional del Perú - 2026</p>
+            <p class="mb-0 opacity-75">Dirección de Educación y Doctrina PNP - 2026</p>
         </div>
     </div>
 
