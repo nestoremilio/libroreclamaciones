@@ -166,7 +166,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-pnp py-3 sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-shield-lock-fill fs-4"></i>
+                <img src="{{ asset('images/direddoc.png') }}" alt="Logo PNP" style="height: 45px; width: auto;">
+
                 <span>PANEL DE CONTROL PNP</span>
             </a>
             <div class="d-flex align-items-center gap-3">
