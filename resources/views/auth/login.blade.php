@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PNP</title>
-    <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -43,12 +40,7 @@
             margin-bottom: 2rem;
         }
 
-        .login-icon {
-            font-size: 3.5rem;
-            color: var(--pnp-green);
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
+        /* Ya no usaremos login-icon porque pondremos la imagen */
 
         .form-control {
             padding: 0.8rem 1rem;
@@ -91,7 +83,9 @@
     <div class="container px-4">
         <div class="login-card mx-auto">
             <div class="login-header">
-                <i class="bi bi-shield-lock-fill login-icon"></i>
+                <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC"
+                    style="height: 110px; width: auto; margin-bottom: 1rem;">
+
                 <h3 class="fw-bold mb-1" style="color: var(--pnp-green-dark);">Acceso Administrativo</h3>
                 <p class="text-muted small mb-0">Sistema de Libro de Reclamaciones - 2026.</p>
             </div>
