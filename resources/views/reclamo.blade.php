@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Libro de Reclamaciones - PNP</title>
-    <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -32,21 +29,17 @@
         .header-pnp {
             background: linear-gradient(135deg, var(--pnp-green) 0%, var(--pnp-green-dark) 100%);
             color: white;
-            padding: 40px 0 80px;
+            padding: 30px 0 80px;
+            /* Ajusté un poco el padding superior */
             box-shadow: 0 4px 20px rgba(19, 88, 53, 0.3);
             text-align: center;
-        }
-
-        .header-logo {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
         }
 
         /* --- Tarjeta del Formulario --- */
         .form-card {
             background: white;
-            border-radius: 1rem; /* rounded-3 equiv approx */
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); /* shadow-sm+ */
+            border-radius: 1rem;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
             margin-top: -60px;
             border: none;
             overflow: hidden;
@@ -66,33 +59,25 @@
         }
 
         /* --- Inputs y Labels --- */
-        .form-floating > label {
-            padding-left: 2.5rem; /* Espacio para icono si fuera absolute, pero usaremos input-group o iconos inline si se prefiere */
+        .form-floating>label {
+            padding-left: 2.5rem;
         }
-        
+
         .input-group-text {
             background-color: transparent;
             border-right: none;
             color: var(--pnp-green);
         }
-        
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--pnp-green);
             box-shadow: 0 0 0 0.25rem rgba(19, 88, 53, 0.25);
         }
 
-        .form-control, .form-select {
-            border-left: none; /* Si usamos input-group */
-        }
-
-        /* Ajuste para inputs sin input-group si se usa form-floating directo con iconos dentro */
-        .input-icon {
-            position: absolute;
-            top: 50%;
-            left: 1rem;
-            transform: translateY(-50%);
-            z-index: 5;
-            color: var(--pnp-gray);
+        .form-control,
+        .form-select {
+            border-left: none;
         }
 
         /* --- Botón Principal --- */
@@ -122,7 +107,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+
         .tipo-reclamo-card:hover {
             background-color: #f8f9fa;
             border-color: var(--pnp-green);
@@ -155,9 +140,14 @@
 
         /* --- Mobile --- */
         @media (max-width: 768px) {
-            .header-pnp { padding: 30px 0 50px; }
-            .form-card { margin-top: -30px; padding: 1.5rem !important; }
-            .header-logo { font-size: 2.5rem; }
+            .header-pnp {
+                padding: 30px 0 50px;
+            }
+
+            .form-card {
+                margin-top: -30px;
+                padding: 1.5rem !important;
+            }
         }
     </style>
 </head>
@@ -166,7 +156,9 @@
 
     <div class="header-pnp">
         <div class="container">
-            <i class="bi bi-shield-shaded header-logo"></i>
+            <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC PNP" class="mb-3"
+                style="height: 120px; width: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
+
             <h1 class="fw-bold h2">Libro de Reclamaciones Virtual</h1>
             <p class="mb-0 opacity-75">Policía Nacional del Perú - 2026</p>
         </div>
@@ -176,7 +168,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
                 <div class="form-card p-4 p-md-5 shadow-sm rounded-3">
-                    
+
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
@@ -187,7 +179,6 @@
                     <form action="{{ route('guardar-reclamo') }}" method="POST">
                         @csrf
 
-                        <!-- Sección 1: Identificación -->
                         <div class="mb-5">
                             <h5 class="section-title">
                                 <i class="bi bi-person-lines-fill"></i>
@@ -196,15 +187,18 @@
 
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <label for="nombre" class="form-label text-muted small fw-bold">Nombre Completo</label>
+                                    <label for="nombre" class="form-label text-muted small fw-bold">Nombre
+                                        Completo</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" name="nombre_completo" class="form-control" id="nombre" placeholder="Ingrese su nombre completo" required>
+                                        <input type="text" name="nombre_completo" class="form-control" id="nombre"
+                                            placeholder="Ingrese su nombre completo" required>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-5">
-                                    <label for="tipoDoc" class="form-label text-muted small fw-bold">Tipo Documento</label>
+                                    <label for="tipoDoc" class="form-label text-muted small fw-bold">Tipo
+                                        Documento</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
                                         <select name="tipo_documento" class="form-select" id="tipoDoc">
@@ -216,40 +210,47 @@
                                 </div>
 
                                 <div class="col-12 col-md-7">
-                                    <label for="numDoc" class="form-label text-muted small fw-bold">Número Documento</label>
+                                    <label for="numDoc" class="form-label text-muted small fw-bold">Número
+                                        Documento</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-123"></i></span>
-                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc" placeholder="Ej: 12345678" required inputmode="numeric">
+                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc"
+                                            placeholder="Ej: 12345678" required inputmode="numeric">
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="domicilio" class="form-label text-muted small fw-bold">Domicilio Actual</label>
+                                    <label for="domicilio" class="form-label text-muted small fw-bold">Domicilio
+                                        Actual</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                        <input type="text" name="domicilio" class="form-control" id="domicilio" placeholder="Dirección completa" required>
+                                        <input type="text" name="domicilio" class="form-control" id="domicilio"
+                                            placeholder="Dirección completa" required>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <label for="telefono" class="form-label text-muted small fw-bold">Teléfono / Celular</label>
+                                    <label for="telefono" class="form-label text-muted small fw-bold">Teléfono /
+                                        Celular</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ej: 999888777" required inputmode="tel">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono"
+                                            placeholder="Ej: 999888777" required inputmode="tel">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <label for="email" class="form-label text-muted small fw-bold">Correo Electrónico</label>
+                                    <label for="email" class="form-label text-muted small fw-bold">Correo
+                                        Electrónico</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
+                                        <input type="email" name="email" class="form-control" id="email"
+                                            placeholder="ejemplo@correo.com" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Sección 2: Detalle Reclamo -->
                         <div class="mb-4">
                             <h5 class="section-title">
                                 <i class="bi bi-file-earmark-text-fill"></i>
@@ -258,7 +259,8 @@
 
                             <div class="row g-3">
                                 <div class="col-12 col-md-8">
-                                    <label for="tipoBien" class="form-label text-muted small fw-bold">Bien Contratado</label>
+                                    <label for="tipoBien" class="form-label text-muted small fw-bold">Bien
+                                        Contratado</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
                                         <select name="tipo_bien" class="form-select" id="tipoBien">
@@ -269,43 +271,53 @@
                                 </div>
 
                                 <div class="col-12 col-md-4">
-                                    <label for="monto" class="form-label text-muted small fw-bold">Monto (Opcional)</label>
+                                    <label for="monto" class="form-label text-muted small fw-bold">Monto
+                                        (Opcional)</label>
                                     <div class="input-group">
                                         <span class="input-group-text">S/</span>
-                                        <input type="number" step="0.01" name="monto_reclamado" class="form-control" id="monto" placeholder="0.00">
+                                        <input type="number" step="0.01" name="monto_reclamado" class="form-control"
+                                            id="monto" placeholder="0.00">
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="descBien" class="form-label text-muted small fw-bold">Descripción del Bien/Servicio</label>
+                                    <label for="descBien" class="form-label text-muted small fw-bold">Descripción del
+                                        Bien/Servicio</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                                        <input type="text" name="descripcion_bien" class="form-control" id="descBien" placeholder="Ej: Trámite de Antecedentes Policiales" required>
+                                        <input type="text" name="descripcion_bien" class="form-control" id="descBien"
+                                            placeholder="Ej: Trámite de Antecedentes Policiales" required>
                                     </div>
                                 </div>
 
                                 <div class="col-12 mt-4">
-                                    <label class="fw-bold mb-3 d-block small text-uppercase text-secondary">Tipo de Registro:</label>
+                                    <label class="fw-bold mb-3 d-block small text-uppercase text-secondary">Tipo de
+                                        Registro:</label>
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="tipo-reclamo-card h-100">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="reclamo" id="radioReclamo" checked>
-                                                    <label class="form-check-label fw-bold text-dark" for="radioReclamo">
+                                                    <input class="form-check-input" type="radio" name="tipo_reclamo"
+                                                        value="reclamo" id="radioReclamo" checked>
+                                                    <label class="form-check-label fw-bold text-dark"
+                                                        for="radioReclamo">
                                                         Reclamo
                                                     </label>
-                                                    <small class="d-block text-muted lh-sm mt-1">Disconformidad relacionada a los productos o servicios.</small>
+                                                    <small class="d-block text-muted lh-sm mt-1">Disconformidad
+                                                        relacionada a los productos o servicios.</small>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="tipo-reclamo-card h-100">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="queja" id="radioQueja">
+                                                    <input class="form-check-input" type="radio" name="tipo_reclamo"
+                                                        value="queja" id="radioQueja">
                                                     <label class="form-check-label fw-bold text-dark" for="radioQueja">
                                                         Queja
                                                     </label>
-                                                    <small class="d-block text-muted lh-sm mt-1">Malestar o descontento respecto a la atención al público.</small>
+                                                    <small class="d-block text-muted lh-sm mt-1">Malestar o descontento
+                                                        respecto a la atención al público.</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,13 +325,19 @@
                                 </div>
 
                                 <div class="col-12 mt-3">
-                                    <label for="detalle" class="form-label text-muted small fw-bold">Detalle de los hechos</label>
-                                    <textarea name="detalle" class="form-control" placeholder="Describa detalladamente lo sucedido..." id="detalle" style="height: 120px" required></textarea>
+                                    <label for="detalle" class="form-label text-muted small fw-bold">Detalle de los
+                                        hechos</label>
+                                    <textarea name="detalle" class="form-control"
+                                        placeholder="Describa detalladamente lo sucedido..." id="detalle"
+                                        style="height: 120px" required></textarea>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="pedido" class="form-label text-muted small fw-bold">Pedido del Usuario</label>
-                                    <textarea name="pedido" class="form-control" placeholder="¿Qué solución espera recibir?" id="pedido" style="height: 100px" required></textarea>
+                                    <label for="pedido" class="form-label text-muted small fw-bold">Pedido del
+                                        Usuario</label>
+                                    <textarea name="pedido" class="form-control"
+                                        placeholder="¿Qué solución espera recibir?" id="pedido" style="height: 100px"
+                                        required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -329,7 +347,8 @@
                                 <i class="bi bi-send-fill me-2"></i> Enviar Reclamo
                             </button>
                             <p class="small text-muted mt-3">
-                                <i class="bi bi-lock-fill"></i> Sus datos serán tratados conforme a la Ley de Protección de Datos Personales.
+                                <i class="bi bi-lock-fill"></i> Sus datos serán tratados conforme a la Ley de Protección
+                                de Datos Personales.
                             </p>
                         </div>
 
@@ -352,4 +371,5 @@
     </footer>
 
 </body>
+
 </html>
