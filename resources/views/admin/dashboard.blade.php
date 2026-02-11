@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin - PNP</title>
+    
+    <title>Libro de Reclamaciones - DIREDDOC PNP</title>
+    <link rel="icon" href="{{ asset('images/direddoc.png') }}" type="image/png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -179,7 +182,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                 <img src="{{ asset('images/direddoc.png') }}" alt="Logo PNP" style="height: 45px; width: auto;">
-                <span>PANEL DE CONTROL PNP</span>
+                <span>SISTEMA ADMINISTRATIVO - DIREDDOC</span>
             </a>
             <div class="d-flex align-items-center gap-3">
                 <div class="d-none d-md-block text-end lh-1">
