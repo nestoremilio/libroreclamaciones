@@ -166,7 +166,18 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('guardar-reclamo') }}" method="POST">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('guardar-reclamo') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-5">
@@ -305,6 +316,18 @@
                                     <label for="pedido" class="form-label text-muted small fw-bold">Pedido del Usuario</label>
                                     <textarea name="pedido" class="form-control" placeholder="¿Qué solución espera recibir?" id="pedido" style="height: 100px" required></textarea>
                                 </div>
+
+                                <div class="col-12 mt-3">
+                                    <label for="evidencia" class="form-label text-muted small fw-bold">Adjuntar Evidencia (Opcional)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-paperclip"></i></span>
+                                        <input type="file" name="evidencia" class="form-control" id="evidencia" accept="application/pdf">
+                                    </div>
+                                    <div class="form-text small text-muted">
+                                        <i class="bi bi-info-circle"></i> Solo se permiten documentos en formato <strong>PDF</strong>.
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
