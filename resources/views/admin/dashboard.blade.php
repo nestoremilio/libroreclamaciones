@@ -136,6 +136,7 @@
             justify-content: center;
             border-radius: 6px;
             transition: all 0.2s;
+            margin-left: 5px;
         }
 
         .btn-view {
@@ -146,6 +147,17 @@
 
         .btn-view:hover {
             background-color: #0d6efd;
+            color: white;
+        }
+
+        .btn-pdf {
+            background-color: #ffeaea;
+            color: #dc3545;
+            border: none;
+        }
+
+        .btn-pdf:hover {
+            background-color: #dc3545;
             color: white;
         }
 
@@ -167,7 +179,6 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                 <img src="{{ asset('images/direddoc.png') }}" alt="Logo PNP" style="height: 45px; width: auto;">
-
                 <span>PANEL DE CONTROL PNP</span>
             </a>
             <div class="d-flex align-items-center gap-3">
@@ -225,7 +236,7 @@
                                 <th>Ciudadano</th>
                                 <th>Documento</th>
                                 <th style="width: 120px;">Estado</th>
-                                <th class="text-end pe-4" style="width: 120px;">Acciones</th>
+                                <th class="text-end pe-4" style="width: 160px;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -257,14 +268,19 @@
                                         @endif
                                     </td>
                                     <td class="text-end pe-4">
-                                        <div class="d-flex justify-content-end gap-2">
-                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view"
-                                                title="Ver Detalle">
+                                        <div class="d-flex justify-content-end">
+                                            
+                                            @if($reclamo->evidencia)
+                                                <a href="{{ asset('storage/' . $reclamo->evidencia) }}" target="_blank" class="btn-action btn-pdf" title="Ver Evidencia PDF">
+                                                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                                                </a>
+                                            @endif
+
+                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view" title="Ver Detalle">
                                                 <i class="bi bi-eye-fill"></i>
                                             </a>
 
-                                            <form action="{{ route('admin.destroy', $reclamo->id) }}" method="POST"
-                                                class="d-inline">
+                                            <form action="{{ route('admin.destroy', $reclamo->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-action btn-delete"
