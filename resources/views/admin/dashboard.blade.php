@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Libro de Reclamaciones - DIREDDOC PNP</title>
     <link rel="icon" href="{{ asset('images/direddoc.png') }}" type="image/png">
 
@@ -36,8 +35,9 @@
 
         .navbar-brand {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Ajustado para móviles */
             letter-spacing: 0.5px;
+            white-space: normal; /* Permite que el texto baje si es necesario */
         }
 
         /* --- Cards & Widgets --- */
@@ -72,14 +72,6 @@
             line-height: 1;
         }
 
-        .stat-card .stat-label {
-            color: #6c757d;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-
         /* --- Table --- */
         .table-card {
             overflow: hidden;
@@ -92,44 +84,32 @@
             border-bottom: 2px solid #e9ecef;
             padding: 1rem;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem; /* Texto más compacto */
+            white-space: nowrap; /* Títulos en una línea */
         }
 
         .table tbody td {
             vertical-align: middle;
             padding: 1rem;
             color: #212529;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            white-space: nowrap; /* Evita que la tabla se rompa hacia abajo */
         }
 
-        .table-hover tbody tr:hover {
-            background-color: rgba(19, 88, 53, 0.03);
-        }
-
-        /* --- Badges --- */
+        /* --- Badges & Buttons --- */
         .badge-status {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             display: inline-flex;
             align-items: center;
             gap: 5px;
         }
 
-        .status-pendiente {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
+        .status-pendiente { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .status-atendido { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
 
-        .status-atendido {
-            background-color: #d1e7dd;
-            color: #0f5132;
-            border: 1px solid #badbcc;
-        }
-
-        /* --- Buttons --- */
         .btn-action {
             width: 32px;
             height: 32px;
@@ -141,66 +121,69 @@
             transition: all 0.2s;
             margin-left: 5px;
         }
+        
+        .btn-view { background-color: #e7f1ff; color: #0d6efd; border: none; }
+        .btn-view:hover { background-color: #0d6efd; color: white; }
+        
+        .btn-pdf { background-color: #ffeaea; color: #dc3545; border: none; }
+        .btn-pdf:hover { background-color: #dc3545; color: white; }
+        
+        .btn-delete { background-color: #f8d7da; color: #dc3545; border: none; }
+        .btn-delete:hover { background-color: #dc3545; color: white; }
 
-        .btn-view {
-            background-color: #e7f1ff;
-            color: #0d6efd;
-            border: none;
-        }
-
-        .btn-view:hover {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .btn-pdf {
-            background-color: #ffeaea;
-            color: #dc3545;
-            border: none;
-        }
-
-        .btn-pdf:hover {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-delete {
-            background-color: #f8d7da;
-            color: #dc3545;
-            border: none;
-        }
-
-        .btn-delete:hover {
-            background-color: #dc3545;
-            color: white;
+        /* RESPONSIVIDAD */
+        @media (max-width: 768px) {
+            .navbar-brand span {
+                font-size: 0.85rem; /* Texto más pequeño en navbar */
+            }
+            
+            .navbar-brand img {
+                height: 35px !important;
+            }
+            
+            /* En móvil, ocultamos el nombre del admin para ahorrar espacio */
+            .user-info-desktop {
+                display: none !important;
+            }
+            
+            h2 { font-size: 1.5rem; }
+            
+            /* La tabla tendrá scroll horizontal */
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-pnp py-3 sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-pnp py-2 py-md-3 sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                 <img src="{{ asset('images/direddoc.png') }}" alt="Logo PNP" style="height: 45px; width: auto;">
                 <span>SISTEMA ADMINISTRATIVO - DIREDDOC</span>
             </a>
+            
             <div class="d-flex align-items-center gap-3">
-                <div class="d-none d-md-block text-end lh-1">
+                <div class="d-none d-md-block text-end lh-1 user-info-desktop">
                     <div class="text-white fw-bold" style="font-size: 0.9rem;">Administrador</div>
                     <small class="text-white-50" style="font-size: 0.75rem;">Sesión Activa</small>
                 </div>
-                <div class="vr text-white opacity-25 mx-2"></div>
+                
+                <div class="vr text-white opacity-25 mx-2 d-none d-md-block"></div>
+                
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
                     <button type="submit" class="btn btn-outline-light btn-sm px-3 rounded-pill border-opacity-50">
-                        <i class="bi bi-box-arrow-right me-1"></i> Salir
+                        <i class="bi bi-box-arrow-right me-1"></i> <span class="d-none d-sm-inline">Salir</span>
                     </button>
                 </form>
             </div>
         </div>
     </nav>
 
-    <div class="container py-5 flex-grow-1">
+    <div class="container py-4 py-md-5 flex-grow-1">
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
@@ -212,7 +195,7 @@
         <div class="row g-4 mb-4 align-items-center">
             <div class="col-md-8">
                 <h2 class="fw-bold mb-1" style="color: var(--pnp-green-dark);">Bandeja de Reclamaciones</h2>
-                <p class="text-muted mb-0">Gestión y seguimiento de reclamos ciudadanos.</p>
+                <p class="text-muted mb-0 small">Gestión y seguimiento de reclamos ciudadanos.</p>
             </div>
 
             <div class="col-md-4">
@@ -234,12 +217,12 @@
                     <table class="table table-hover mb-0 align-middle">
                         <thead>
                             <tr>
-                                <th style="width: 120px;">Fecha</th>
-                                <th style="width: 150px;">Código</th>
+                                <th style="width: 100px;">Fecha</th>
+                                <th style="width: 140px;">Código</th>
                                 <th>Ciudadano</th>
                                 <th>Documento</th>
-                                <th style="width: 120px;">Estado</th>
-                                <th class="text-end pe-4" style="width: 160px;">Acciones</th>
+                                <th style="width: 110px;">Estado</th>
+                                <th class="text-end pe-4" style="width: 140px;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -251,12 +234,14 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark border fw-bold font-monospace">
+                                        <span class="badge bg-light text-dark border fw-bold font-monospace small">
                                             {{ $reclamo->codigo_seguimiento }}
                                         </span>
                                     </td>
                                     <td>
-                                        <div class="fw-bold text-dark">{{ $reclamo->nombre_completo }}</div>
+                                        <div class="fw-bold text-dark text-truncate" style="max-width: 200px;">
+                                            {{ $reclamo->nombre_completo }}
+                                        </div>
                                     </td>
                                     <td>{{ $reclamo->numero_documento }}</td>
                                     <td>
@@ -274,12 +259,12 @@
                                         <div class="d-flex justify-content-end">
                                             
                                             @if($reclamo->evidencia)
-                                                <a href="{{ asset('storage/' . $reclamo->evidencia) }}" target="_blank" class="btn-action btn-pdf" title="Ver Evidencia PDF">
+                                                <a href="{{ asset('storage/' . $reclamo->evidencia) }}" target="_blank" class="btn-action btn-pdf" title="Ver PDF">
                                                     <i class="bi bi-file-earmark-pdf-fill"></i>
                                                 </a>
                                             @endif
 
-                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view" title="Ver Detalle">
+                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view" title="Ver">
                                                 <i class="bi bi-eye-fill"></i>
                                             </a>
 

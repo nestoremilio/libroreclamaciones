@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <title>Libro de Reclamaciones - DIREDDOC PNP</title>
     <link rel="icon" href="{{ asset('images/direddoc.png') }}" type="image/png">
 
@@ -32,9 +31,16 @@
         .header-pnp {
             background: linear-gradient(135deg, var(--pnp-green) 0%, var(--pnp-green-dark) 100%);
             color: white;
-            padding: 30px 0 80px;
+            padding: 40px 0 90px; /* Más espacio abajo para el efecto flotante */
             box-shadow: 0 4px 20px rgba(19, 88, 53, 0.3);
             text-align: center;
+        }
+
+        .header-logo {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            transition: all 0.3s ease;
         }
 
         /* --- Tarjeta del Formulario --- */
@@ -42,7 +48,7 @@
             background: white;
             border-radius: 1rem;
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-            margin-top: -60px;
+            margin-top: -60px; /* Efecto flotante */
             border: none;
             overflow: hidden;
             position: relative;
@@ -61,12 +67,8 @@
         }
 
         /* --- Inputs y Labels --- */
-        .form-floating > label {
-            padding-left: 2.5rem;
-        }
-        
         .input-group-text {
-            background-color: transparent;
+            background-color: #f8f9fa;
             border-right: none;
             color: var(--pnp-green);
         }
@@ -77,6 +79,13 @@
         }
 
         .form-control, .form-select {
+            border-left: none;
+            border: 1px solid #ced4da;
+            border-left: none;
+        }
+        
+        /* Borde completo para inputs en móvil si se prefiere, o mantener estilo group */
+        .input-group > .form-control {
             border-left: none;
         }
 
@@ -138,10 +147,42 @@
             color: var(--pnp-green);
         }
 
-        /* --- Mobile --- */
+        /* --- RESPONSIVIDAD (MOBILE) --- */
         @media (max-width: 768px) {
-            .header-pnp { padding: 30px 0 50px; }
-            .form-card { margin-top: -30px; padding: 1.5rem !important; }
+            .header-pnp { 
+                padding: 30px 15px 70px; /* Menos padding lateral */
+            }
+            
+            .header-logo {
+                height: 80px; /* Logo más pequeño en celular */
+            }
+
+            .h2 {
+                font-size: 1.5rem; /* Título más pequeño */
+            }
+
+            .form-card { 
+                margin-top: -40px; /* Ajuste del margen negativo */
+                padding: 1.5rem !important; /* Menos padding interno */
+                border-radius: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .section-title i {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+            
+            /* Ajuste para que los radio buttons se vean bien en vertical */
+            .tipo-reclamo-card {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -150,17 +191,17 @@
 
     <div class="header-pnp">
         <div class="container">
-            <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC PNP" class="mb-3" style="height: 120px; width: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
+            <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC PNP" class="header-logo mb-3">
             
             <h1 class="fw-bold h2">Libro de Reclamaciones Virtual</h1>
-            <p class="mb-0 opacity-75">Dirección de Educación y Doctrina de la PNP - 2026</p>
+            <p class="mb-0 opacity-75 small">Dirección de Educación y Doctrina de la PNP - 2026</p>
         </div>
     </div>
 
     <div class="container pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
-                <div class="form-card p-4 p-md-5 shadow-sm rounded-3">
+                <div class="form-card p-4 p-md-5 shadow-sm">
                     
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -171,7 +212,7 @@
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul class="mb-0">
+                            <ul class="mb-0 ps-3">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -183,7 +224,7 @@
                     <form action="{{ route('guardar-reclamo') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="mb-5">
+                        <div class="mb-4 mb-md-5">
                             <h5 class="section-title">
                                 <i class="bi bi-person-lines-fill"></i>
                                 <span>1. Identificación del Usuario</span>
@@ -354,7 +395,7 @@
             <hr class="mb-4 opacity-25">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <span class="mb-2 mb-md-0">&copy; Desarrollado por UNITIC-DIREDDOC</span>
-                <a href="{{ route('login') }}" class="admin-link">
+                <a href="{{ route('login') }}" class="admin-link mt-2 mt-md-0">
                     <i class="bi bi-shield-lock me-1"></i> Acceso Administrativo
                 </a>
             </div>

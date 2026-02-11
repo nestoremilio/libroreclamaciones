@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Libro de Reclamaciones - DIREDDOC PNP</title>
     <link rel="icon" href="{{ asset('images/direddoc.png') }}" type="image/png">
 
@@ -21,12 +20,13 @@
         }
 
         body {
-            background-color: var(--pnp-green-dark); /* Fondo oscuro elegante para login */
+            background-color: var(--pnp-green-dark);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px; /* Margen general para que la tarjeta no toque los bordes en celular */
             background-image: radial-gradient(circle at 50% 50%, #135835 0%, #0e4429 100%);
         }
 
@@ -37,7 +37,7 @@
             border: none;
             overflow: hidden;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px; /* Ancho máximo controlado */
             padding: 2.5rem;
         }
 
@@ -51,8 +51,9 @@
 
         .form-control {
             padding: 12px 15px;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
             border: 1px solid #dee2e6;
+            border-left: none;
         }
 
         .form-control:focus {
@@ -66,11 +67,6 @@
             border-right: none;
             color: var(--pnp-green);
             border-radius: 8px 0 0 8px;
-        }
-        
-        .form-control {
-            border-left: none;
-            border-radius: 0 8px 8px 0;
         }
 
         .btn-login {
@@ -104,6 +100,16 @@
 
         .back-link:hover {
             color: var(--pnp-green);
+        }
+
+        /* RESPONSIVIDAD */
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 1.5rem; /* Menos relleno en celular */
+            }
+            .login-logo {
+                height: 80px; /* Logo más pequeño */
+            }
         }
     </style>
 </head>
