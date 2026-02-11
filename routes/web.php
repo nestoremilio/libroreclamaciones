@@ -51,3 +51,30 @@ Route::get('/actualizar-bd', function () {
         return '<h1>Error:</h1>' . $e->getMessage();
     }
 });
+// --- RUTA DE EMERGENCIA PARA CREAR ADMIN ---
+Route::get('/crear-admin', function () {
+    try {
+        // Verifica si ya existe para no duplicar
+        if (\App\Models\User::where('email', 'admin@pnp.gob.pe')->exists()) {
+            return "<h1>El usuario ya existe</h1><a href='/login'>Ir al Login</a>";
+        }
+
+        // Crea el usuario
+        \App\Models\User::create([
+            'name' => 'Administrador PNP',
+            'email' => 'admin@pnp.gob.pe', // Correo
+            'password' => \Illuminate\Support\Facades\Hash::make('12345678'), // Contraseña
+        ]);
+
+        return '<div style="text-align:center; font-family:sans-serif; margin-top:50px;">
+                    <h1 style="color:green;">¡Usuario Creado con Éxito!</h1>
+                    <p>Usa estas credenciales:</p>
+                    <p><strong>Correo:</strong> admin@pnp.gob.pe</p>
+                    <p><strong>Contraseña:</strong> 12345678</p>
+                    <br>
+                    <a href="/login" style="background:#135835; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Ir al Login</a>
+                </div>';
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
