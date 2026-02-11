@@ -27,6 +27,7 @@ class LibroReclamaciones extends Model
         'detalle',
         'pedido',
         'codigo_seguimiento',
-        'estado'
+        'estado',
+        'evidencia', // <--- ¡CAMPO NUEVO AGREGADO!
     ];
 }

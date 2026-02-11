@@ -26,6 +26,10 @@ return new class extends Migration {
             $table->text('detalle');
             $table->text('pedido');
 
+            // --- NUEVO CAMPO: EVIDENCIA (PDF) ---
+            // Puede ser nulo porque el usuario no está obligado a subirlo
+            $table->string('evidencia')->nullable(); 
+
             // 3. Gestión Interna
             $table->string('codigo_seguimiento')->unique(); // Para que el usuario consulte
             $table->string('estado')->default('pendiente'); // pendiente, atendido, etc.
