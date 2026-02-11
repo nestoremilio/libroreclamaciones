@@ -218,7 +218,9 @@
                                     <label for="telefono" class="form-label text-muted small fw-bold">Teléfono / Celular</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ej: 999888777" required inputmode="tel">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" 
+                                               placeholder="Ej: 999888777" required inputmode="numeric" 
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="9">
                                     </div>
                                 </div>
 
