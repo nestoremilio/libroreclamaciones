@@ -200,7 +200,9 @@
                                     <label for="numDoc" class="form-label text-muted small fw-bold">Número Documento</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-123"></i></span>
-                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc" placeholder="Ej: 12345678" required inputmode="numeric">
+                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc" 
+                                               placeholder="Ej: 12345678" required inputmode="numeric" 
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="12">
                                     </div>
                                 </div>
 
