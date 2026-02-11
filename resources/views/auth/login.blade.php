@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - PNP</title>
+    
+    <title>Libro de Reclamaciones - DIREDDOC PNP</title>
+    <link rel="icon" href="{{ asset('images/direddoc.png') }}" type="image/png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -14,38 +17,42 @@
             --pnp-green: #135835;
             --pnp-green-dark: #0e4429;
             --pnp-gray: #6c757d;
+            --bg-light: #f4f6f9;
         }
 
         body {
-            background: linear-gradient(135deg, var(--pnp-green) 0%, #082d1f 100%);
-            height: 100vh;
+            background-color: var(--pnp-green-dark); /* Fondo oscuro elegante para login */
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 50% 50%, #135835 0%, #0e4429 100%);
         }
 
         .login-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.3);
+            border: none;
+            overflow: hidden;
             width: 100%;
             max-width: 420px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 16px;
             padding: 2.5rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .login-logo {
+            height: 100px;
+            width: auto;
+            display: block;
+            margin: 0 auto 1.5rem;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
         }
-
-        /* Ya no usaremos login-icon porque pondremos la imagen */
 
         .form-control {
-            padding: 0.8rem 1rem;
+            padding: 12px 15px;
             border-radius: 8px;
-            border: 1px solid #ced4da;
+            border: 1px solid #dee2e6;
         }
 
         .form-control:focus {
@@ -53,91 +60,104 @@
             box-shadow: 0 0 0 0.25rem rgba(19, 88, 53, 0.25);
         }
 
+        .input-group-text {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-right: none;
+            color: var(--pnp-green);
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .form-control {
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+        }
+
         .btn-login {
             background-color: var(--pnp-green);
             color: white;
-            padding: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s;
+            font-weight: 700;
+            padding: 12px;
+            border-radius: 50px;
+            width: 100%;
             border: none;
+            transition: all 0.3s;
+            margin-top: 1rem;
         }
 
         .btn-login:hover {
             background-color: var(--pnp-green-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(19, 88, 53, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(19, 88, 53, 0.4);
             color: white;
         }
 
-        .footer-login {
+        .back-link {
+            color: #adb5bd;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: block;
             text-align: center;
             margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: #6c757d;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--pnp-green);
         }
     </style>
 </head>
 
 <body>
-    <div class="container px-4">
-        <div class="login-card mx-auto">
-            <div class="login-header">
-                <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC"
-                    style="height: 110px; width: auto; margin-bottom: 1rem;">
 
-                <h3 class="fw-bold mb-1" style="color: var(--pnp-green-dark);">Acceso Administrativo</h3>
-                <p class="text-muted small mb-0">Sistema de Libro de Reclamaciones - 2026.</p>
+    <div class="login-card">
+        <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC" class="login-logo">
+        
+        <h4 class="text-center fw-bold mb-1" style="color: var(--pnp-green-dark);">Acceso Administrativo</h4>
+        <p class="text-center text-muted small mb-4">Sistema de Libro de Reclamaciones - 2026</p>
+
+        @if ($errors->any())
+            <div class="alert alert-danger py-2 small rounded-3 mb-3">
+                <ul class="mb-0 ps-3">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+
+            <div class="mb-3">
+                <label for="email" class="form-label small fw-bold text-secondary">Correo Institucional</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="usuario@pnp.gob.pe" required autofocus>
+                </div>
             </div>
 
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-
-                @if ($errors->any())
-                    <div class="alert alert-danger py-2 small rounded-3">
-                        <ul class="mb-0 ps-3">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-secondary">Correo Institucional</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0"><i
-                                class="bi bi-envelope text-secondary"></i></span>
-                        <input type="email" name="email" class="form-control border-start-0 ps-0"
-                            placeholder="usuario@pnp.gob.pe" required autofocus>
-                    </div>
+            <div class="mb-4">
+                <label for="password" class="form-label small fw-bold text-secondary">Contraseña</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="••••••••" required>
                 </div>
+            </div>
 
-                <div class="mb-4">
-                    <label class="form-label small fw-bold text-secondary">Contraseña</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0"><i
-                                class="bi bi-key text-secondary"></i></span>
-                        <input type="password" name="password" class="form-control border-start-0 ps-0"
-                            placeholder="••••••••" required>
-                    </div>
-                </div>
+            <button type="submit" class="btn btn-login shadow-sm">
+                Ingresar al Sistema
+            </button>
 
-                <div class="d-grid mb-3">
-                    <button type="submit" class="btn btn-login">
-                        Ingresar al Sistema
-                    </button>
-                </div>
+            <a href="{{ url('/') }}" class="back-link">
+                <i class="bi bi-arrow-left"></i> Volver al Inicio
+            </a>
+        </form>
 
-                <div class="footer-login">
-                    <a href="{{ url('/') }}" class="text-decoration-none small text-secondary">
-                        <i class="bi bi-arrow-left"></i> Volver al Inicio
-                    </a>
-                </div>
-            </form>
+        <div class="text-center mt-4 pt-3 border-top">
+            <small class="text-muted" style="font-size: 0.7rem;">&copy; Desarrollado por UNITIC-DIREDDOC PNP</small>
         </div>
-        <p class="text-center text-white-50 mt-4 small">&copy; Desarollado por UNITIC-DIREDDOC PNP</p>
     </div>
-</body>
 
+</body>
 </html>
