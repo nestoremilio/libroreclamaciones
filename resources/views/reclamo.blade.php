@@ -150,7 +150,7 @@
             <img src="{{ asset('images/direddoc.png') }}" alt="Logo DIREDDOC PNP" class="mb-3" style="height: 120px; width: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
             
             <h1 class="fw-bold h2">Libro de Reclamaciones Virtual</h1>
-            <p class="mb-0 opacity-75">Policía Nacional del Perú - 2026</p>
+            <p class="mb-0 opacity-75">Dirección de Educación y Doctrina de la PNP - 2026</p>
         </div>
     </div>
 
@@ -323,7 +323,7 @@
         <div class="container">
             <hr class="mb-4 opacity-25">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <span class="mb-2 mb-md-0">&copy; 2026 Policía Nacional del Perú - DIREDDOC</span>
+                <span class="mb-2 mb-md-0">&copy; Desarrollado por UNITIC-DIREDDOC</span>
                 <a href="{{ route('login') }}" class="admin-link">
                     <i class="bi bi-shield-lock me-1"></i> Acceso Administrativo
                 </a>
