@@ -45,6 +45,16 @@ class ReclamoPublico extends Component
         'evidencia' => 'nullable|mimes:pdf|max:5120',
     ];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function removeFile()
+    {
+        $this->evidencia = null;
+    }
+
     public function guardar()
     {
         $this->validate();
