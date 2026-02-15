@@ -275,15 +275,51 @@
                         @error('descripcion_bien') <div class="text-danger small mt-1 ms-1">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="col-12">
-                        <div class="d-flex gap-3 justify-content-center bg-light p-3 rounded-3 border">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" wire:model.live="tipo_reclamo" id="r1" value="reclamo">
-                                <label class="form-check-label fw-bold" for="r1">Reclamo</label>
+                    <div class="col-12 mt-2">
+                        <label class="form-label text-muted small fw-bold mb-3 d-block">Tipo de Registro</label>
+                        <div class="row g-3">
+                            <!-- Opción Reclamo -->
+                            <div class="col-6">
+                                <label class="card h-100 border cursor-pointer transition-all shadow-sm position-relative overflow-hidden" 
+                                       :class="$wire.tipo_reclamo === 'reclamo' ? 'border-success bg-success bg-opacity-10' : 'border-light bg-light'"
+                                       style="cursor: pointer; transition: all 0.3s ease;">
+                                    <div class="card-body text-center p-4">
+                                        <input class="form-check-input position-absolute top-0 end-0 m-3" type="radio" wire:model.live="tipo_reclamo" value="reclamo" style="transform: scale(1.2);">
+                                        <div class="mb-2">
+                                            <i class="bi bi-exclamation-octagon-fill fs-1" 
+                                               :class="$wire.tipo_reclamo === 'reclamo' ? 'text-success' : 'text-secondary opacity-50'"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-1" :class="$wire.tipo_reclamo === 'reclamo' ? 'text-success' : 'text-muted'">Reclamo</h6>
+                                        <small class="d-block lh-sm small" :class="$wire.tipo_reclamo === 'reclamo' ? 'text-success opacity-75' : 'text-muted opacity-75'">
+                                            Disconformidad con la atención o servicio.
+                                        </small>
+                                    </div>
+                                    <!-- Borde inferior activo -->
+                                    <div class="position-absolute bottom-0 start-0 w-100" style="height: 4px;"
+                                         :class="$wire.tipo_reclamo === 'reclamo' ? 'bg-success' : 'bg-transparent'"></div>
+                                </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" wire:model.live="tipo_reclamo" id="r2" value="queja">
-                                <label class="form-check-label fw-bold" for="r2">Queja</label>
+
+                            <!-- Opción Queja -->
+                            <div class="col-6">
+                                <label class="card h-100 border cursor-pointer transition-all shadow-sm position-relative overflow-hidden" 
+                                       :class="$wire.tipo_reclamo === 'queja' ? 'border-success bg-success bg-opacity-10' : 'border-light bg-light'"
+                                       style="cursor: pointer; transition: all 0.3s ease;">
+                                    <div class="card-body text-center p-4">
+                                        <input class="form-check-input position-absolute top-0 end-0 m-3" type="radio" wire:model.live="tipo_reclamo" value="queja" style="transform: scale(1.2);">
+                                        <div class="mb-2">
+                                            <i class="bi bi-emoji-frown-fill fs-1" 
+                                               :class="$wire.tipo_reclamo === 'queja' ? 'text-success' : 'text-secondary opacity-50'"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-1" :class="$wire.tipo_reclamo === 'queja' ? 'text-success' : 'text-muted'">Queja</h6>
+                                        <small class="d-block lh-sm small" :class="$wire.tipo_reclamo === 'queja' ? 'text-success opacity-75' : 'text-muted opacity-75'">
+                                            Malestar por conducta irregular de personal.
+                                        </small>
+                                    </div>
+                                    <!-- Borde inferior activo -->
+                                    <div class="position-absolute bottom-0 start-0 w-100" style="height: 4px;"
+                                         :class="$wire.tipo_reclamo === 'queja' ? 'bg-success' : 'bg-transparent'"></div>
+                                </label>
                             </div>
                         </div>
                     </div>
