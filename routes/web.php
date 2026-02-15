@@ -32,7 +32,7 @@ Route::get('/limpiar', function () {
     return '¡Sistema limpio y actualizado!';
 });
 
-// ¡ESTA ES LA RUTA MÁGICA PARA ARREGLAR TU ERROR!
+// ¡ESTA ES LA RUTA MÁGICA PARA ARREGLAR TU ERROR DE BASE DE DATOS!
 Route::get('/actualizar-bd', function () {
     try {
         // Esto borra la tabla vieja y la crea de nuevo con la columna 'evidencia'
@@ -51,6 +51,7 @@ Route::get('/actualizar-bd', function () {
         return '<h1>Error:</h1>' . $e->getMessage();
     }
 });
+
 // --- RUTA DE EMERGENCIA PARA CREAR ADMIN ---
 Route::get('/crear-admin', function () {
     try {
@@ -73,6 +74,26 @@ Route::get('/crear-admin', function () {
                     <p><strong>Contraseña:</strong> 12345678</p>
                     <br>
                     <a href="/login" style="background:#135835; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Ir al Login</a>
+                </div>';
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
+
+// --- NUEVA RUTA: INSTALAR DEPENDENCIAS (LIVEWIRE) ---
+Route::get('/instalar-dependencias', function () {
+    try {
+        // Limpiamos todas las cachés para que Laravel detecte los nuevos paquetes
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+
+        return '<div style="font-family:sans-serif; text-align:center; padding:50px;">
+                    <h1 style="color:green;">¡Dependencias Sincronizadas!</h1>
+                    <p>El sistema ha detectado la instalación de Livewire.</p>
+                    <p>Las cachés y vistas han sido limpiadas correctamente.</p>
+                    <a href="/" style="background:#135835; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Ir al Inicio</a>
                 </div>';
     } catch (\Exception $e) {
         return "Error: " . $e->getMessage();

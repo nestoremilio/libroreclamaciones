@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    @livewireStyles
+
     <style>
         :root {
             --pnp-green: #135835;
@@ -31,7 +33,7 @@
         .header-pnp {
             background: linear-gradient(135deg, var(--pnp-green) 0%, var(--pnp-green-dark) 100%);
             color: white;
-            padding: 40px 0 90px; /* Más espacio abajo para el efecto flotante */
+            padding: 40px 0 90px;
             box-shadow: 0 4px 20px rgba(19, 88, 53, 0.3);
             text-align: center;
         }
@@ -48,7 +50,7 @@
             background: white;
             border-radius: 1rem;
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-            margin-top: -60px; /* Efecto flotante */
+            margin-top: -60px;
             border: none;
             overflow: hidden;
             position: relative;
@@ -84,7 +86,6 @@
             border-left: none;
         }
         
-        /* Borde completo para inputs en móvil si se prefiere, o mantener estilo group */
         .input-group > .form-control {
             border-left: none;
         }
@@ -149,40 +150,13 @@
 
         /* --- RESPONSIVIDAD (MOBILE) --- */
         @media (max-width: 768px) {
-            .header-pnp { 
-                padding: 30px 15px 70px; /* Menos padding lateral */
-            }
-            
-            .header-logo {
-                height: 80px; /* Logo más pequeño en celular */
-            }
-
-            .h2 {
-                font-size: 1.5rem; /* Título más pequeño */
-            }
-
-            .form-card { 
-                margin-top: -40px; /* Ajuste del margen negativo */
-                padding: 1.5rem !important; /* Menos padding interno */
-                border-radius: 0.8rem;
-            }
-
-            .section-title {
-                font-size: 1rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .section-title i {
-                font-size: 1.2rem;
-                margin-bottom: 5px;
-            }
-            
-            /* Ajuste para que los radio buttons se vean bien en vertical */
-            .tipo-reclamo-card {
-                margin-bottom: 10px;
-            }
+            .header-pnp { padding: 30px 15px 70px; }
+            .header-logo { height: 80px; }
+            .h2 { font-size: 1.5rem; }
+            .form-card { margin-top: -40px; padding: 1.5rem !important; border-radius: 0.8rem; }
+            .section-title { font-size: 1rem; flex-direction: column; align-items: flex-start; gap: 5px; }
+            .section-title i { font-size: 1.2rem; margin-bottom: 5px; }
+            .tipo-reclamo-card { margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -401,6 +375,8 @@
             </div>
         </div>
     </footer>
+
+    @livewireScripts
 
 </body>
 </html>
