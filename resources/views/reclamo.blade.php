@@ -68,7 +68,7 @@
             font-size: 1.1rem;
         }
 
-        /* --- Inputs y Labels --- */
+        /* --- Inputs y Labels (Estilos globales para Livewire) --- */
         .input-group-text {
             background-color: #f8f9fa;
             border-right: none;
@@ -81,13 +81,7 @@
         }
 
         .form-control, .form-select {
-            border-left: none;
             border: 1px solid #ced4da;
-            border-left: none;
-        }
-        
-        .input-group > .form-control {
-            border-left: none;
         }
 
         /* --- Botón Principal --- */
@@ -107,25 +101,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(19, 88, 53, 0.4);
             color: white;
-        }
-
-        /* --- Radio Button Cards --- */
-        .tipo-reclamo-card {
-            border: 1px solid #dee2e6;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .tipo-reclamo-card:hover {
-            background-color: #f8f9fa;
-            border-color: var(--pnp-green);
-        }
-
-        .form-check-input:checked {
-            background-color: var(--pnp-green);
-            border-color: var(--pnp-green);
         }
 
         /* --- Footer --- */
@@ -154,9 +129,6 @@
             .header-logo { height: 80px; }
             .h2 { font-size: 1.5rem; }
             .form-card { margin-top: -40px; padding: 1.5rem !important; border-radius: 0.8rem; }
-            .section-title { font-size: 1rem; flex-direction: column; align-items: flex-start; gap: 5px; }
-            .section-title i { font-size: 1.2rem; margin-bottom: 5px; }
-            .tipo-reclamo-card { margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -177,188 +149,8 @@
             <div class="col-lg-10 col-xl-8">
                 <div class="form-card p-4 p-md-5 shadow-sm">
                     
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
+                    <livewire:reclamo-publico />
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul class="mb-0 ps-3">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('guardar-reclamo') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="mb-4 mb-md-5">
-                            <h5 class="section-title">
-                                <i class="bi bi-person-lines-fill"></i>
-                                <span>1. Identificación del Usuario</span>
-                            </h5>
-
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label for="nombre" class="form-label text-muted small fw-bold">Nombre Completo</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" name="nombre_completo" class="form-control" id="nombre" placeholder="Ingrese su nombre completo" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-5">
-                                    <label for="tipoDoc" class="form-label text-muted small fw-bold">Tipo Documento</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
-                                        <select name="tipo_documento" class="form-select" id="tipoDoc">
-                                            <option>DNI</option>
-                                            <option>Carnet Extranjería</option>
-                                            <option>Pasaporte</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-7">
-                                    <label for="numDoc" class="form-label text-muted small fw-bold">Número Documento</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-123"></i></span>
-                                        <input type="tel" name="numero_documento" class="form-control" id="numDoc" 
-                                               placeholder="Ej: 12345678" required inputmode="numeric" 
-                                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="12">
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="domicilio" class="form-label text-muted small fw-bold">Domicilio Actual</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                        <input type="text" name="domicilio" class="form-control" id="domicilio" placeholder="Dirección completa" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <label for="telefono" class="form-label text-muted small fw-bold">Teléfono / Celular</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" 
-                                               placeholder="Ej: 999888777" required inputmode="numeric" 
-                                               oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="9">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <label for="email" class="form-label text-muted small fw-bold">Correo Electrónico</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <h5 class="section-title">
-                                <i class="bi bi-file-earmark-text-fill"></i>
-                                <span>2. Detalle de la Reclamación</span>
-                            </h5>
-
-                            <div class="row g-3">
-                                <div class="col-12 col-md-8">
-                                    <label for="tipoBien" class="form-label text-muted small fw-bold">Bien Contratado</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
-                                        <select name="tipo_bien" class="form-select" id="tipoBien">
-                                            <option value="servicio">Servicio (Atención, trámites, etc.)</option>
-                                            <option value="producto">Producto (Bienes materiales)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4">
-                                    <label for="monto" class="form-label text-muted small fw-bold">Monto (Opcional)</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">S/</span>
-                                        <input type="number" step="0.01" name="monto_reclamado" class="form-control" id="monto" placeholder="0.00">
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="descBien" class="form-label text-muted small fw-bold">Descripción del Bien/Servicio</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                                        <input type="text" name="descripcion_bien" class="form-control" id="descBien" placeholder="Ej: Trámite de Antecedentes Policiales" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 mt-4">
-                                    <label class="fw-bold mb-3 d-block small text-uppercase text-secondary">Tipo de Registro:</label>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <div class="tipo-reclamo-card h-100">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="reclamo" id="radioReclamo" checked>
-                                                    <label class="form-check-label fw-bold text-dark" for="radioReclamo">
-                                                        Reclamo
-                                                    </label>
-                                                    <small class="d-block text-muted lh-sm mt-1">Disconformidad relacionada a los productos o servicios.</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="tipo-reclamo-card h-100">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipo_reclamo" value="queja" id="radioQueja">
-                                                    <label class="form-check-label fw-bold text-dark" for="radioQueja">
-                                                        Queja
-                                                    </label>
-                                                    <small class="d-block text-muted lh-sm mt-1">Malestar o descontento respecto a la atención al público.</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 mt-3">
-                                    <label for="detalle" class="form-label text-muted small fw-bold">Detalle de los hechos</label>
-                                    <textarea name="detalle" class="form-control" placeholder="Describa detalladamente lo sucedido..." id="detalle" style="height: 120px" required></textarea>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="pedido" class="form-label text-muted small fw-bold">Pedido del Usuario</label>
-                                    <textarea name="pedido" class="form-control" placeholder="¿Qué solución espera recibir?" id="pedido" style="height: 100px" required></textarea>
-                                </div>
-
-                                <div class="col-12 mt-3">
-                                    <label for="evidencia" class="form-label text-muted small fw-bold">Adjuntar Evidencia (Opcional)</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-paperclip"></i></span>
-                                        <input type="file" name="evidencia" class="form-control" id="evidencia" accept="application/pdf">
-                                    </div>
-                                    <div class="form-text small text-muted">
-                                        <i class="bi bi-info-circle"></i> Solo se permiten documentos en formato <strong>PDF</strong>.
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="text-center mt-5">
-                            <button type="submit" class="btn btn-pnp btn-lg shadow">
-                                <i class="bi bi-send-fill me-2"></i> Enviar Reclamo
-                            </button>
-                            <p class="small text-muted mt-3">
-                                <i class="bi bi-lock-fill"></i> Sus datos serán tratados conforme a la Ley de Protección de Datos Personales.
-                            </p>
-                        </div>
-
-                    </form>
                 </div>
             </div>
         </div>
