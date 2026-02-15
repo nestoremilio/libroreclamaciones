@@ -286,7 +286,7 @@
                                     <div class="card-body text-center p-4">
                                         <input class="form-check-input position-absolute top-0 end-0 m-3" type="radio" wire:model.live="tipo_reclamo" value="reclamo" style="transform: scale(1.2);">
                                         <div class="mb-2">
-                                            <i class="bi bi-exclamation-octagon-fill fs-1" 
+                                            <i class="bi bi-exclamation-circle fs-1" 
                                                :class="$wire.tipo_reclamo === 'reclamo' ? 'text-success' : 'text-secondary opacity-50'"></i>
                                         </div>
                                         <h6 class="fw-bold mb-1" :class="$wire.tipo_reclamo === 'reclamo' ? 'text-success' : 'text-muted'">Reclamo</h6>
@@ -308,7 +308,7 @@
                                     <div class="card-body text-center p-4">
                                         <input class="form-check-input position-absolute top-0 end-0 m-3" type="radio" wire:model.live="tipo_reclamo" value="queja" style="transform: scale(1.2);">
                                         <div class="mb-2">
-                                            <i class="bi bi-emoji-frown-fill fs-1" 
+                                            <i class="bi bi-person-x fs-1" 
                                                :class="$wire.tipo_reclamo === 'queja' ? 'text-success' : 'text-secondary opacity-50'"></i>
                                         </div>
                                         <h6 class="fw-bold mb-1" :class="$wire.tipo_reclamo === 'queja' ? 'text-success' : 'text-muted'">Queja</h6>
