@@ -150,24 +150,6 @@
         .check-row { margin-bottom: 4px; font-size: 10px; }
         .check-icon { color: #135835; font-weight: bold; margin-right: 5px; }
 
-        /* ── FIRMA ── */
-        .firma-section {
-            margin-top: 30px;
-            display: table;
-            width: 100%;
-        }
-        .firma-col {
-            display: table-cell;
-            width: 33%;
-            text-align: center;
-            padding: 0 10px;
-        }
-        .firma-line {
-            border-top: 1px solid #333;
-            margin: 0 10px 4px;
-        }
-        .firma-label { font-size: 9px; color: #555; }
-
         /* ── PIE ── */
         .footer {
             margin-top: 20px;
@@ -191,7 +173,7 @@
             <img src="{{ public_path('images/direddoc.png') }}" alt="Logo">
         </div>
         <div class="header-text">
-            <div class="inst">Dirección Ejecutiva de Documentación e Identificación</div>
+            <div class="inst">Dirección de Educación y Doctrina de la PNP</div>
             <div class="title">HOJA DE RECLAMACIÓN</div>
             <div class="subtitle">DIREDDOC PNP — Libro de Reclamaciones Oficial</div>
         </div>
@@ -305,33 +287,6 @@
             <div class="check-row">
                 <span class="check-icon">{{ $reclamo->declaracion_jurada_veracidad ? '☑' : '☐' }}</span>
                 Declara bajo juramento que la información proporcionada es verídica y exacta.
-            </div>
-        </div>
-
-        <hr class="divider">
-
-        {{-- FIRMAS --}}
-        <div class="firma-section">
-            <div class="firma-col">
-                <br><br>
-                <div class="firma-line"></div>
-                <div class="firma-label">Firma del Ciudadano</div>
-                <div class="firma-label" style="margin-top:2px;">{{ $reclamo->nombres_apellidos }}</div>
-                <div class="firma-label">DNI: {{ $reclamo->numero_documento }}</div>
-            </div>
-            <div class="firma-col">
-                <br><br>
-                <div class="firma-line"></div>
-                <div class="firma-label">Recibido por</div>
-                <div class="firma-label" style="margin-top:2px;">Responsable del Libro de Reclamaciones</div>
-                <div class="firma-label">Sello y Firma</div>
-            </div>
-            <div class="firma-col">
-                <br><br>
-                <div class="firma-line"></div>
-                <div class="firma-label">Derivado a</div>
-                <div class="firma-label" style="margin-top:2px;">Área Competente</div>
-                <div class="firma-label">Sello y Firma</div>
             </div>
         </div>
 
