@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\LibroReclamaciones;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -44,6 +45,19 @@ class AdminController extends Controller
         return response()->file(Storage::disk('public')->path($reclamo->evidencia_pdf_path), [
             'Content-Type' => 'application/pdf',
         ]);
+    }
+
+    // Descargar reporte PDF del reclamo
+    public function descargarReporte($id)
+    {
+        $reclamo = LibroReclamaciones::findOrFail($id);
+
+        $pdf = Pdf::loadView('admin.reporte-pdf', compact('reclamo'))
+                  ->setPaper('a4', 'portrait');
+
+        $filename = 'Reclamo_' . ($reclamo->numero_hoja_reclamacion ?? $id) . '.pdf';
+
+        return $pdf->download($filename);
     }
 
     // Eliminar un reclamo (SOLO UNA VEZ)

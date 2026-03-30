@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/reclamo/{id}', [AdminController::class, 'show'])->name('admin.show');
     Route::get('/admin/reclamo/{id}/evidencia', [AdminController::class, 'verEvidencia'])->name('admin.evidencia');
+    Route::get('/admin/reclamo/{id}/reporte', [AdminController::class, 'descargarReporte'])->name('admin.reporte');
     Route::post('/admin/reclamo/{id}/atender', [AdminController::class, 'atender'])->name('admin.atender');
     Route::delete('/admin/reclamo/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });

@@ -10,9 +10,14 @@
 
 <body class="bg-light">
     <div class="container mt-4 mb-5" style="max-width: 860px;">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary mb-4">
-            <i class="bi bi-arrow-left me-1"></i> Volver al Panel
-        </a>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Volver al Panel
+            </a>
+            <a href="{{ route('admin.reporte', $reclamo->id) }}" class="btn btn-success">
+                <i class="bi bi-download me-2"></i> Descargar Reporte PDF
+            </a>
+        </div>
 
         <div class="card shadow-sm border-0">
             <div class="card-header text-white d-flex justify-content-between align-items-center" style="background:#135835;">

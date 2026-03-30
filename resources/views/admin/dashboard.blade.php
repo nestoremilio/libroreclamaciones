@@ -127,6 +127,9 @@
         
         .btn-pdf { background-color: #ffeaea; color: #dc3545; border: none; }
         .btn-pdf:hover { background-color: #dc3545; color: white; }
+
+        .btn-download { background-color: #e8f5e9; color: #135835; border: none; }
+        .btn-download:hover { background-color: #135835; color: white; }
         
         .btn-delete { background-color: #f8d7da; color: #dc3545; border: none; }
         .btn-delete:hover { background-color: #dc3545; color: white; }
@@ -268,7 +271,11 @@
                                                 </a>
                                             @endif
 
-                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view" title="Ver">
+                                            <a href="{{ route('admin.reporte', $reclamo->id) }}" class="btn-action btn-download" title="Descargar Reporte PDF">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+
+                                            <a href="{{ route('admin.show', $reclamo->id) }}" class="btn-action btn-view" title="Ver Detalle">
                                                 <i class="bi bi-eye-fill"></i>
                                             </a>
 
