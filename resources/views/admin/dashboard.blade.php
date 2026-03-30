@@ -265,12 +265,6 @@
                                     <td class="text-end pe-4">
                                         <div class="d-flex justify-content-end">
                                             
-                                            @if($reclamo->evidencia_pdf_path)
-                                                <a href="{{ route('admin.evidencia', $reclamo->id) }}" target="_blank" class="btn-action btn-pdf" title="Ver PDF">
-                                                    <i class="bi bi-file-earmark-pdf-fill"></i>
-                                                </a>
-                                            @endif
-
                                             <a href="{{ route('admin.reporte', $reclamo->id) }}" class="btn-action btn-download" title="Descargar Reporte PDF">
                                                 <i class="bi bi-download"></i>
                                             </a>

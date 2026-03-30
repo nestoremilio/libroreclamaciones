@@ -52,14 +52,14 @@
                                 <span class="badge bg-success">Resuelto</span>
                             @endif
                         </p>
-                        @if($reclamo->evidencia_pdf_path)
-                            <p class="mb-1">
-                                <strong>Evidencia:</strong>
-                                <a href="{{ route('admin.evidencia', $reclamo->id) }}" target="_blank" class="btn btn-sm btn-outline-danger ms-2">
-                                    <i class="bi bi-file-earmark-pdf-fill me-1"></i> Ver PDF
-                                </a>
-                            </p>
-                        @endif
+                        <p class="mb-1">
+                            <strong>Evidencia:</strong>
+                            @if($reclamo->evidencia_pdf_path)
+                                <span class="badge bg-success ms-1"><i class="bi bi-paperclip me-1"></i>Adjunta (incluida en el reporte)</span>
+                            @else
+                                <span class="text-muted small">Sin evidencia adjunta</span>
+                            @endif
+                        </p>
                     </div>
                 </div>
 
