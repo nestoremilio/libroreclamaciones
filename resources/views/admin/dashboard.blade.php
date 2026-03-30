@@ -235,12 +235,12 @@
                                     </td>
                                     <td>
                                         <span class="badge bg-light text-dark border fw-bold font-monospace small">
-                                            {{ $reclamo->codigo_seguimiento }}
+                                            {{ $reclamo->codigo_seguimiento ?: 'Sin código' }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="fw-bold text-dark text-truncate" style="max-width: 200px;">
-                                            {{ $reclamo->nombre_completo }}
+                                            {{ $reclamo->nombre_completo ?: 'Sin nombre' }}
                                         </div>
                                     </td>
                                     <td>{{ $reclamo->numero_documento }}</td>
@@ -259,7 +259,7 @@
                                         <div class="d-flex justify-content-end">
                                             
                                             @if($reclamo->evidencia)
-                                                <a href="{{ asset('storage/' . $reclamo->evidencia) }}" target="_blank" class="btn-action btn-pdf" title="Ver PDF">
+                                                <a href="{{ route('admin.evidencia', $reclamo->id) }}" target="_blank" class="btn-action btn-pdf" title="Ver PDF">
                                                     <i class="bi bi-file-earmark-pdf-fill"></i>
                                                 </a>
                                             @endif

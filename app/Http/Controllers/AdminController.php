@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\LibroReclamaciones;
 
 class AdminController extends Controller
@@ -29,6 +30,20 @@ class AdminController extends Controller
         $reclamo->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo marcado como atendido correctamente.');
+    }
+
+    // Ver evidencia PDF
+    public function verEvidencia($id)
+    {
+        $reclamo = LibroReclamaciones::findOrFail($id);
+
+        if (!$reclamo->evidencia || !Storage::disk('public')->exists($reclamo->evidencia)) {
+            abort(404, 'Archivo no encontrado.');
+        }
+
+        return response()->file(Storage::disk('public')->path($reclamo->evidencia), [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 
     // Eliminar un reclamo (SOLO UNA VEZ)
