@@ -10,31 +10,33 @@ return new class extends Migration {
         Schema::create('libro_reclamaciones', function (Blueprint $table) {
             $table->id();
 
-            // 1. Datos del Usuario
-            $table->string('nombre_completo');
-            $table->string('tipo_documento');
-            $table->string('numero_documento');
-            $table->string('domicilio');
-            $table->string('telefono');
-            $table->string('email');
+            // Datos del ciudadano
+            $table->string('tipo_documento', 10);
+            $table->string('numero_documento', 20)->unique();
+            $table->string('nombres_apellidos', 200);
+            $table->string('domicilio', 300);
+            $table->string('telefono', 20)->nullable();
+            $table->string('correo', 150);
 
-            // 2. Detalle del Reclamo
-            $table->string('tipo_bien'); // Producto o Servicio
-            $table->decimal('monto_reclamado', 10, 2)->nullable(); // Opcional
-            $table->string('descripcion_bien');
-            $table->string('tipo_reclamo'); // Queja o Reclamo
-            $table->text('detalle');
-            $table->text('pedido');
+            // Detalle del reclamo
+            $table->enum('tipo_registro', ['reclamo', 'queja']);
+            $table->string('dependencia', 200);
+            $table->text('detalle_hechos');
+            $table->text('pedido_usuario');
 
-            // --- NUEVO CAMPO: EVIDENCIA (PDF) ---
-            // Puede ser nulo porque el usuario no está obligado a subirlo
-            $table->string('evidencia')->nullable(); 
+            // Evidencia adjunta
+            $table->string('evidencia_pdf_path', 255)->nullable();
 
-            // 3. Gestión Interna
-            $table->string('codigo_seguimiento')->unique(); // Para que el usuario consulte
-            $table->string('estado')->default('pendiente'); // pendiente, atendido, etc.
+            // Declaraciones
+            $table->tinyInteger('autoriza_notificacion_correo')->default(0);
+            $table->tinyInteger('acepta_politicas_privacidad')->default(0);
+            $table->tinyInteger('declaracion_jurada_veracidad')->default(0);
 
-            $table->timestamps(); // Fecha de creación
+            // Gestión interna
+            $table->enum('estado', ['pendiente', 'en_proceso', 'resuelto'])->default('pendiente');
+            $table->string('numero_hoja_reclamacion', 20)->nullable()->unique();
+
+            $table->timestamps();
         });
     }
 

@@ -26,7 +26,7 @@ class AdminController extends Controller
     public function atender($id)
     {
         $reclamo = LibroReclamaciones::findOrFail($id);
-        $reclamo->estado = 'Atendido';
+        $reclamo->estado = 'en_proceso';
         $reclamo->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo marcado como atendido correctamente.');
@@ -37,11 +37,11 @@ class AdminController extends Controller
     {
         $reclamo = LibroReclamaciones::findOrFail($id);
 
-        if (!$reclamo->evidencia || !Storage::disk('public')->exists($reclamo->evidencia)) {
+        if (!$reclamo->evidencia_pdf_path || !Storage::disk('public')->exists($reclamo->evidencia_pdf_path)) {
             abort(404, 'Archivo no encontrado.');
         }
 
-        return response()->file(Storage::disk('public')->path($reclamo->evidencia), [
+        return response()->file(Storage::disk('public')->path($reclamo->evidencia_pdf_path), [
             'Content-Type' => 'application/pdf',
         ]);
     }

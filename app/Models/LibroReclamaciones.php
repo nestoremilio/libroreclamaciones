@@ -9,25 +9,24 @@ class LibroReclamaciones extends Model
 {
     use HasFactory;
 
-    // Nombre exacto de la tabla en la base de datos
     protected $table = 'libro_reclamaciones';
 
-    // Campos que permitimos guardar
     protected $fillable = [
-        'nombre_completo',
         'tipo_documento',
         'numero_documento',
+        'nombres_apellidos',
         'domicilio',
         'telefono',
-        'email',
-        'tipo_bien',
-        'monto_reclamado',
-        'descripcion_bien',
-        'tipo_reclamo',
-        'detalle',
-        'pedido',
-        'codigo_seguimiento',
+        'correo',
+        'tipo_registro',
+        'dependencia',
+        'detalle_hechos',
+        'pedido_usuario',
+        'evidencia_pdf_path',
+        'autoriza_notificacion_correo',
+        'acepta_politicas_privacidad',
+        'declaracion_jurada_veracidad',
         'estado',
-        'evidencia', // <--- ¡CAMPO NUEVO AGREGADO!
+        'numero_hoja_reclamacion',
     ];
 }

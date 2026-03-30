@@ -204,7 +204,7 @@
                     <div class="d-flex flex-column">
                         <span class="stat-label mb-2">Reclamos Pendientes</span>
                         <div class="stat-value text-warning">
-                            {{ $reclamos->where('estado', 'pendiente')->count() }}
+                            {{ $reclamos->whereIn('estado', ['pendiente', 'en_proceso'])->count() }}
                         </div>
                     </div>
                 </div>
@@ -235,12 +235,12 @@
                                     </td>
                                     <td>
                                         <span class="badge bg-light text-dark border fw-bold font-monospace small">
-                                            {{ $reclamo->codigo_seguimiento ?: 'Sin código' }}
+                                            {{ $reclamo->numero_hoja_reclamacion ?: 'Sin código' }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="fw-bold text-dark text-truncate" style="max-width: 200px;">
-                                            {{ $reclamo->nombre_completo ?: 'Sin nombre' }}
+                                            {{ $reclamo->nombres_apellidos ?: 'Sin nombre' }}
                                         </div>
                                     </td>
                                     <td>{{ $reclamo->numero_documento }}</td>
@@ -249,16 +249,20 @@
                                             <span class="badge-status status-pendiente">
                                                 <i class="bi bi-hourglass-split"></i> Pendiente
                                             </span>
+                                        @elseif($reclamo->estado == 'en_proceso')
+                                            <span class="badge-status" style="background:#cfe2ff;color:#084298;border:1px solid #b6d4fe;">
+                                                <i class="bi bi-gear-fill"></i> En Proceso
+                                            </span>
                                         @else
                                             <span class="badge-status status-atendido">
-                                                <i class="bi bi-check-circle-fill"></i> Atendido
+                                                <i class="bi bi-check-circle-fill"></i> Resuelto
                                             </span>
                                         @endif
                                     </td>
                                     <td class="text-end pe-4">
                                         <div class="d-flex justify-content-end">
                                             
-                                            @if($reclamo->evidencia)
+                                            @if($reclamo->evidencia_pdf_path)
                                                 <a href="{{ route('admin.evidencia', $reclamo->id) }}" target="_blank" class="btn-action btn-pdf" title="Ver PDF">
                                                     <i class="bi bi-file-earmark-pdf-fill"></i>
                                                 </a>

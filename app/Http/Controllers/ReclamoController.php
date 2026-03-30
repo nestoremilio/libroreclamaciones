@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LibroReclamaciones; // <--- USAMOS TU MODELO CORRECTO
+use App\Models\LibroReclamaciones;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class ReclamoController extends Controller
 {
@@ -16,50 +14,48 @@ class ReclamoController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Validamos
         $request->validate([
-            'nombre_completo' => 'required|string|max:255',
-            'tipo_documento' => 'required',
-            'numero_documento' => 'required|numeric',
-            'domicilio' => 'required',
-            'telefono' => 'required|numeric',
-            'email' => 'required|email',
-            'tipo_bien' => 'required',
-            'descripcion_bien' => 'required',
-            'tipo_reclamo' => 'required',
-            'detalle' => 'required',
-            'pedido' => 'required',
-            'evidencia' => 'nullable|mimes:pdf|max:5120', // Solo PDF, max 5MB
+            'nombres_apellidos'            => 'required|string|max:200',
+            'tipo_documento'               => 'required',
+            'numero_documento'             => 'required|digits_between:8,12',
+            'domicilio'                    => 'required',
+            'telefono'                     => 'nullable|numeric|digits:9',
+            'correo'                       => 'required|email',
+            'tipo_registro'               => 'required|in:reclamo,queja',
+            'dependencia'                  => 'required',
+            'detalle_hechos'               => 'required',
+            'pedido_usuario'               => 'required',
+            'evidencia_pdf_path'           => 'nullable|mimes:pdf|max:5120',
         ]);
 
-        // 2. Código único
-        $codigo = 'REC-' . now()->format('Ymd') . '-' . rand(1000, 9999);
+        $anio   = now()->format('Y');
+        $count  = LibroReclamaciones::whereYear('created_at', $anio)->count() + 1;
+        $numero = $anio . '-' . str_pad($count, 6, '0', STR_PAD_LEFT);
 
-        // 3. Subida del Archivo
         $rutaEvidencia = null;
-        if ($request->hasFile('evidencia')) {
-            $rutaEvidencia = $request->file('evidencia')->store('evidencias', 'public');
+        if ($request->hasFile('evidencia_pdf_path')) {
+            $rutaEvidencia = $request->file('evidencia_pdf_path')->store('evidencias', 'public');
         }
 
-        // 4. Guardar en BD usando tu modelo 'LibroReclamaciones'
         LibroReclamaciones::create([
-            'codigo_seguimiento' => $codigo,
-            'nombre_completo' => $request->nombre_completo,
-            'tipo_documento' => $request->tipo_documento,
-            'numero_documento' => $request->numero_documento,
-            'domicilio' => $request->domicilio,
-            'telefono' => $request->telefono,
-            'email' => $request->email,
-            'tipo_bien' => $request->tipo_bien,
-            'monto_reclamado' => $request->monto_reclamado,
-            'descripcion_bien' => $request->descripcion_bien,
-            'tipo_reclamo' => $request->tipo_reclamo,
-            'detalle' => $request->detalle,
-            'pedido' => $request->pedido,
-            'estado' => 'pendiente',
-            'evidencia' => $rutaEvidencia, // Guardamos la ruta
+            'numero_hoja_reclamacion'      => $numero,
+            'nombres_apellidos'            => $request->nombres_apellidos,
+            'tipo_documento'               => $request->tipo_documento,
+            'numero_documento'             => $request->numero_documento,
+            'domicilio'                    => $request->domicilio,
+            'telefono'                     => $request->telefono,
+            'correo'                       => $request->correo,
+            'tipo_registro'                => $request->tipo_registro,
+            'dependencia'                  => $request->dependencia,
+            'detalle_hechos'               => $request->detalle_hechos,
+            'pedido_usuario'               => $request->pedido_usuario,
+            'evidencia_pdf_path'           => $rutaEvidencia,
+            'autoriza_notificacion_correo' => $request->has('autoriza_notificacion_correo') ? 1 : 0,
+            'acepta_politicas_privacidad'  => 1,
+            'declaracion_jurada_veracidad' => 1,
+            'estado'                       => 'pendiente',
         ]);
 
-        return back()->with('success', "Su reclamo ha sido registrado con el código: $codigo");
+        return back()->with('success', "Su reclamo ha sido registrado con el número: $numero");
     }
 }
