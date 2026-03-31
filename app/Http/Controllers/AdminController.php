@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function atender($id)
     {
         $reclamo = LibroReclamaciones::findOrFail($id);
-        $reclamo->estado = 'en_proceso';
+        $reclamo->estado = 'atendido';
         $reclamo->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Reclamo marcado como atendido correctamente.');

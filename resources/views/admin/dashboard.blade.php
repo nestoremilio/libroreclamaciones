@@ -207,7 +207,7 @@
                     <div class="d-flex flex-column">
                         <span class="stat-label mb-2">Reclamos Pendientes</span>
                         <div class="stat-value text-warning">
-                            {{ $reclamos->whereIn('estado', ['pendiente', 'en_proceso'])->count() }}
+                            {{ $reclamos->where('estado', 'pendiente')->count() }}
                         </div>
                     </div>
                 </div>
@@ -252,13 +252,9 @@
                                             <span class="badge-status status-pendiente">
                                                 <i class="bi bi-hourglass-split"></i> Pendiente
                                             </span>
-                                        @elseif($reclamo->estado == 'en_proceso')
-                                            <span class="badge-status" style="background:#cfe2ff;color:#084298;border:1px solid #b6d4fe;">
-                                                <i class="bi bi-gear-fill"></i> En Proceso
-                                            </span>
                                         @else
                                             <span class="badge-status status-atendido">
-                                                <i class="bi bi-check-circle-fill"></i> Resuelto
+                                                <i class="bi bi-check-circle-fill"></i> Atendido
                                             </span>
                                         @endif
                                     </td>

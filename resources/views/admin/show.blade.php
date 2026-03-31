@@ -46,10 +46,8 @@
                         <p class="mb-1"><strong>Estado:</strong>
                             @if($reclamo->estado == 'pendiente')
                                 <span class="badge" style="background:#fff3cd;color:#856404;">Pendiente</span>
-                            @elseif($reclamo->estado == 'en_proceso')
-                                <span class="badge bg-primary">En Proceso</span>
                             @else
-                                <span class="badge bg-success">Resuelto</span>
+                                <span class="badge bg-success">Atendido</span>
                             @endif
                         </p>
                         <p class="mb-1">
@@ -82,18 +80,14 @@
                         <form action="{{ route('admin.atender', $reclamo->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-success btn-lg"
-                                onclick="return confirm('¿Está seguro de marcar este reclamo como En Proceso?')">
-                                <i class="bi bi-gear-fill me-2"></i> Marcar como En Proceso
+                                onclick="return confirm('¿Está seguro de marcar este reclamo como Atendido?')">
+                                <i class="bi bi-check-circle-fill me-2"></i> Marcar como Atendido
                             </button>
                         </form>
                     </div>
-                @elseif($reclamo->estado == 'en_proceso')
-                    <div class="alert alert-primary text-center mb-0">
-                        <i class="bi bi-gear-fill me-2"></i> <strong>Este reclamo está siendo atendido.</strong>
-                    </div>
                 @else
                     <div class="alert alert-success text-center mb-0">
-                        <i class="bi bi-check-circle-fill me-2"></i> <strong>Este reclamo ya fue resuelto.</strong>
+                        <i class="bi bi-check-circle-fill me-2"></i> <strong>Este reclamo ya fue atendido.</strong>
                     </div>
                 @endif
 
